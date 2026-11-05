@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DSA 500 — A logic-building roadmap through 500 free LeetCode problems, pattern-classified across 25 phases. Track progress, hints, revisions and time — all local, offline, yours.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#131110" id="metatheme">
+<meta name="description" content="DSA 500 — A logic-building roadmap through a curated set of free LeetCode problems, pattern-classified across phases. Track progress, hints, revisions and time — all local, offline, yours.">
 <title>DSA 500 — Logic Building Roadmap</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,10 +35,12 @@ html[data-theme="light"]{
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:'Space Grotesk',ui-serif,Georgia,serif;font-size:15px;line-height:1.5}
+body{background:var(--bg);color:var(--tx);font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.5}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 select,input,textarea{font-family:inherit;color:var(--tx)}
 a{color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.qh:focus-visible{outline-offset:-2px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 
 /* ---------- layout ---------- */
@@ -107,7 +111,7 @@ details.cheat[open] summary::before{content:"−"}
 .hero .pct{font-family:'JetBrains Mono',monospace;color:var(--acc);font-size:14px;margin-top:8px}
 .hero .hright{margin-left:auto;text-align:right;color:var(--mut);font-size:12.5px;line-height:1.8}
 .hero .hright b{color:var(--tx)}
-.strip{display:grid;grid-template-columns:repeat(100,1fr);gap:2px;padding:16px 18px}
+.strip{display:grid;grid-template-columns:repeat(var(--stripcols),1fr);gap:2px;padding:16px 18px}
 .strip i{height:9px;border-radius:2px;background:var(--sur2);cursor:pointer;transition:transform .1s}
 .strip i:hover{transform:scale(1.5)}
 .strip i.st1{background:var(--teal)} .strip i.st2{background:var(--grn)} .strip i.st3{background:var(--red)}
@@ -221,7 +225,7 @@ input.tin:focus,select.tin:focus{border-color:var(--acc)}
 <aside id="side">
   <div class="brand"><h1>DSA·500</h1><div class="sub">Logic Building OS</div></div>
   <nav id="nav"></nav>
-  <div class="foot">500 problems · 0 premium<br>local · offline · yours</div>
+  <div class="foot" id="sidefoot"></div>
 </aside>
 
 <div id="main">
@@ -232,7 +236,7 @@ input.tin:focus,select.tin:focus{border-color:var(--acc)}
       <input id="search" type="text" placeholder="Search: name, number, pattern, company, topic, LC id…">
     </div>
     <div class="mini">
-      <div class="lbl" id="toplbl">0 / 500</div>
+      <div class="lbl" id="toplbl"></div>
       <div class="bar"><i id="topbar" style="width:0%"></i></div>
       <button id="themebtn" class="iconbtn" aria-label="Toggle theme"></button>
     </div>
@@ -720,7 +724,7 @@ dedupe:PT("Deduplication","Repeated Identities","SQL · Grouping","Distinct-sort
 };
 
 /* ============================================================
-   THE 500-QUESTION CURRICULUM
+   THE QUESTION CURRICULUM
    Row: [title, LC id, 0=E/1=M/2=H, pattern key, company codes, logic skill, neetCode flag, complexity override]
    Companies (publicly reported historical tags): a Amazon · g Google · m Microsoft · f Meta · d Adobe
    p Apple · b Bloomberg · u Uber · l LinkedIn · t Atlassian · s Salesforce · o Oracle · q Qualcomm
@@ -782,7 +786,7 @@ R("Find the Duplicate Number","287",1,"fast_slow","agm","Treat index→value lin
 R("Valid Palindrome","125",0,"two_pointers","amf","Converge from both ends while skipping non-letters.",1),
 R("Remove Element","27",0,"two_pointers","m","Keep a write index for values worth keeping.",0),
 R("Squares of a Sorted Array","977",0,"two_pointers","am","Fill the result from the back using both ends.",0),
-R("Valid Palindrome II","680",1,"two_pointers","amf","Allow exactly one mismatch; try skipping either side.",1),
+R("Valid Palindrome II","680",0,"two_pointers","amf","Allow exactly one mismatch; try skipping either side.",1),
 R("Two Sum II - Input Array Is Sorted","167",1,"two_pointers","am","Exploit sorted order by moving the side that helps.",1),
 R("3Sum","15",1,"two_pointers","agm","Fix one element, then run two pointers on the rest.",1,"O(n²) · O(1)"),
 R("3Sum Closest","16",1,"two_pointers","am","Track the best gap while converging.",0,"O(n²) · O(1)"),
@@ -852,7 +856,7 @@ R("Custom Sort String","791",1,"comparator_sort","am","Convert a permutation int
 R("Sort Characters By Frequency","451",1,"bucket_sort","am","Bucket characters by count, not comparison.",0),
 R("Reorganize String","767",1,"greedy_count","am","Place the most frequent characters on even slots first.",0),
 R("Sort the Matrix Diagonally","1329",1,"comparator_sort","am","Group by diagonal id, sort each group, write back.",0),
-R("Maximum Gap","164",2,"bucket_sort","ap","Pigeonhole: some bucket boundary gap must reach the answer.",0)
+R("Maximum Gap","164",1,"bucket_sort","ap","Pigeonhole: some bucket boundary gap must reach the answer.",0)
 ]},
 {name:"Linked Lists",key:"linked_list",phase:"Phase 3 · Sorting, Lists, Stacks & Queues",brief:"No random access, no shortcuts — only pointer discipline. Dummies, fast/slow, reversal, and merging cover nearly every list question ever asked.",rows:[
 R("Reverse Linked List","206",0,"linked_reverse","agm","Reverse pointers iteratively with three variables.",1),
@@ -877,7 +881,7 @@ R("Valid Parentheses","20",0,"stack","agm","Push opens; a close must match the s
 R("Min Stack","155",1,"stack","am","Pair each value with the minimum so far.",1),
 R("Evaluate Reverse Polish Notation","150",1,"stack_expression","am","Apply operators to the two most recent operands.",1),
 R("Daily Temperatures","739",1,"monotonic_stack","agm","Hold waiting days in a decreasing stack.",1),
-R("Next Greater Element I","496",1,"monotonic_stack","am","Resolve waiting elements as you sweep.",0),
+R("Next Greater Element I","496",0,"monotonic_stack","am","Resolve waiting elements as you sweep.",0),
 R("Next Greater Element II","503",1,"monotonic_stack","am","Handle the circular case with a doubled sweep.",0),
 R("Asteroid Collision","735",1,"stack","am","Simulate collisions against the stack top.",1),
 R("Decode String","394",1,"stack","agm","Stack contexts when brackets open; rebuild on close.",1),
@@ -885,7 +889,7 @@ R("Simplify Path","71",1,"stack","am","Treat path segments as push and pop opera
 R("Remove K Digits","402",1,"monotonic_stack","agm","Keep digits increasing; remove peaks greedily.",0),
 R("Remove All Adjacent Duplicates in String II","1209",1,"stack","am","Store (char, run-length) pairs on the stack.",0),
 R("Basic Calculator II","227",1,"stack_expression","am","Evaluate with a term stack and operator lookahead.",0),
-R("Sum of Subarray Minimums","907",2,"monotonic_stack","am","Count each element’s span as a minimum.",0),
+R("Sum of Subarray Minimums","907",1,"monotonic_stack","am","Count each element’s span as a minimum.",0),
 R("Largest Rectangle in Histogram","84",2,"monotonic_stack","agm","Expand each bar until a shorter bar blocks it.",1),
 R("Maximal Rectangle","85",2,"monotonic_stack","agm","Compress rows into histograms; reuse the classic.",0),
 R("Basic Calculator","224",2,"stack_expression","agm","Handle signs and parentheses with recursion or a stack.",0)
@@ -904,7 +908,7 @@ R("Pow(x, n)","50",1,"divide_conquer","agm","Halve the exponent; square the resu
 R("K-th Symbol in Grammar","779",1,"recursion","am","Trace how each row derives from the previous one.",0),
 R("Integer Replacement","397",1,"recursion","am","Branch on odd numbers; prune with parity insight.",0),
 R("Different Ways to Add Parentheses","241",1,"divide_conquer","am","Split at each operator; combine sub-results.",0),
-R("Predict the Winner","464",1,"recursion","am","One score differential serves both players.",0)
+R("Predict the Winner","486",1,"recursion","am","One score differential serves both players.",0)
 ]},
 {name:"Binary Trees",key:"trees",phase:"Phase 4 · Recursion, Trees & BST",brief:"DFS for paths and subtree answers, BFS for levels, post-order DP for take/skip decisions. Construction and serialization round out structural fluency.",rows:[
 R("Invert Binary Tree","226",0,"tree_dfs","am","Swap children at every node; order doesn’t matter.",1),
@@ -932,8 +936,8 @@ R("Flatten Binary Tree to Linked List","114",1,"tree_dfs","am","Rewire as you go
 R("House Robber III","337",1,"tree_dp","am","Each node returns (rob, skip) pairs.",1),
 R("All Nodes Distance K in Binary Tree","863",1,"graph_dfs","amf","Turn the tree into an undirected graph, then BFS.",1),
 R("Vertical Order Traversal of a Binary Tree","987",2,"tree_dfs","am","Bucket nodes by (column, row) in a sorted map.",0),
-R("Binary Tree Cameras","965",2,"tree_dp","am","Post-order states: covered, camera, needs one.",0),
-R("Distribute Coins in Binary Tree","979",2,"tree_dfs","am","Net coin flow through each edge, post-order.",0),
+R("Binary Tree Cameras","968",2,"tree_dp","am","Post-order states: covered, camera, needs one.",0),
+R("Distribute Coins in Binary Tree","979",1,"tree_dfs","am","Net coin flow through each edge, post-order.",0),
 R("Serialize and Deserialize Binary Tree","297",2,"tree_build","agm","Encode structure explicitly; parse it back recursively.",1)
 ]},
 {name:"Binary Search Trees",key:"bst",phase:"Phase 4 · Recursion, Trees & BST",brief:"A BST is a sorted set distributed over a tree. Search by elimination, exploit the sorted inorder, and validate with ancestor bounds.",rows:[
@@ -948,7 +952,7 @@ R("Lowest Common Ancestor of a Binary Search Tree","235",1,"bst","am","The split
 R("Kth Smallest Element in a BST","230",1,"bst_inorder","agm","Stop the inorder traversal at the kth node.",1),
 R("Convert Sorted List to Binary Search Tree","109",1,"tree_build","am","Find the middle with fast/slow, then recurse.",0),
 R("Delete Node in a BST","450",1,"bst","am","Reattach using the successor when deleting.",1),
-R("Recover Binary Search Tree","99",2,"bst_inorder","am","Two swapped nodes betray themselves in inorder.",0)
+R("Recover Binary Search Tree","99",1,"bst_inorder","am","Two swapped nodes betray themselves in inorder.",0)
 ]},
 {name:"Heaps & Priority Queues",key:"heap",phase:"Phase 5 · Heaps & Priority Queues",brief:"PriorityQueue + Comparator: top-k selection, event simulation, k-way merging, and the two-heap median — order statistics without full sorting.",rows:[
 R("Last Stone Weight","1046",0,"heap_greedy","am","Repeatedly extract the two largest with a max heap.",1),
@@ -961,7 +965,7 @@ R("Task Scheduler","621",1,"heap_greedy","agm","Simulate with a max heap and a c
 R("Furthest Building You Can Reach","1642",1,"heap_greedy","am","Spend ladders on the biggest gaps; the heap remembers.",0),
 R("Single-Threaded CPU","1834",1,"heap_greedy","am","Time-sweep with available and pending tasks.",0),
 R("Merge k Sorted Lists","23",2,"heap_merge","agm","Drive one PriorityQueue across k cursors.",1),
-R("K Pairs with Smallest Sums","373",1,"heap_topk","am","Seed a heap with first pairs; expand lazily.",0),
+R("Find K Pairs with Smallest Sums","373",1,"heap_topk","am","Seed a heap with first pairs; expand lazily.",0),
 R("Design Twitter","355",1,"design","am","Per-user feeds merged via heaps and clocks.",0),
 R("Find Median from Data Stream","295",2,"two_heaps","agm","Balance a max heap below with a min heap above.",1),
 R("Sliding Window Median","480",2,"two_heaps","am","Extend the two-heap trick with lazy deletion.",0)
@@ -1010,8 +1014,8 @@ R("Remove Covered Intervals","1288",1,"intervals","am","Sort to expose containme
 R("My Calendar I","729",1,"intervals","am","Check overlap against booked spans.",0),
 R("My Calendar II","731",1,"intervals","am","Track double-booked spans separately.",0),
 R("Video Stitching","1024",1,"intervals_greedy","am","Greedily extend coverage jump by jump.",0),
-R("Minimum Number of Taps to Open to Water a Garden","1326",1,"intervals_greedy","am","Treat each tap as a jump range.",0),
-R("Minimum Interval to Include Each Query","1851",1,"intervals_heap","am","Sort both sides; sweep with a heap of live spans.",0),
+R("Minimum Number of Taps to Open to Water a Garden","1326",2,"intervals_greedy","am","Treat each tap as a jump range.",0),
+R("Minimum Interval to Include Each Query","1851",2,"intervals_heap","am","Sort both sides; sweep with a heap of live spans.",0),
 R("Number of Flowers in Full Bloom","2251",2,"sweep_line","am","Turn starts and ends into sorted events.",0)
 ]},
 {name:"Graphs",key:"graphs",phase:"Phase 8–11 · Graph Algorithms",brief:"Adjacency lists plus a visited set, and the world opens: DFS for components and reachability, BFS for shortest steps, multi-source floods, coloring, and state-expanded search.",rows:[
@@ -1020,7 +1024,7 @@ R("Island Perimeter","463",0,"matrix_dfs","am","Count land cells’ exposed edge
 R("Flood Fill","733",0,"matrix_dfs","am","DFS-recolor connected same-color cells.",1),
 R("Number of Islands","200",1,"matrix_dfs","agm","Sink each island once with DFS or BFS.",1),
 R("Max Area of Island","695",1,"matrix_dfs","agm","Return island size from each flood fill.",1),
-R("Keys and Rooms","841",0,"graph_dfs","am","Visit rooms reachable via collected keys.",0),
+R("Keys and Rooms","841",1,"graph_dfs","am","Visit rooms reachable via collected keys.",0),
 R("Number of Provinces","547",1,"graph_dfs","agm","Count DFS launches from unvisited nodes.",1),
 R("Find the Town Judge","997",0,"degree","am","Compare in-degrees against out-degrees.",0),
 R("Find Center of Star Graph","1791",0,"degree","am","The center appears in every edge.",0),
@@ -1043,7 +1047,7 @@ R("Evaluate Division","399",1,"graph_dfs","am","Weights on edges turn queries in
 R("Is Graph Bipartite?","785",1,"bipartite","am","Two-color the graph across a DFS or BFS.",1),
 R("Reorder Routes to Make All Paths Lead to the City Zero","1466",1,"graph_dfs","am","Count edges pointing away while traversing from 0.",0),
 R("Path with Maximum Gold","1219",1,"backtracking_grid","am","Backtrack through cells, collecting and restoring.",0),
-R("Reconstruct Itinerary","332",1,"graph_dfs","am","Consume smallest edges first — Eulerian path.",0),
+R("Reconstruct Itinerary","332",2,"graph_dfs","am","Consume smallest edges first — Eulerian path.",0),
 R("Number of Operations to Make Network Connected","1319",1,"union_find","am","Count components and spare cables.",0),
 R("N-ary Tree Level Order Traversal","429",1,"tree_bfs","am","Level order generalizes past binary.",0),
 R("Time Needed to Inform All Employees","1376",1,"graph_dfs","am","Longest root-to-leaf path in a tree of durations.",0),
@@ -1055,8 +1059,8 @@ R("Redundant Connection","684",1,"union_find","am","Union edges; the first faili
 R("Accounts Merge","721",1,"union_find","agm","Union emails by shared account, then group.",1),
 R("Most Stones Removed with Same Row or Column","947",1,"union_find","am","Stones sharing a row or column join one component.",0),
 R("Satisfiability of Equality Equations","990",1,"union_find","am","Union equal variables; check the inequations.",0),
-R("Smallest String With Swaps","1201",1,"union_find","am","Swappable indices form components; sort each.",0),
-R("Regions Cut by Slashes","959",2,"union_find","am","Split each cell into four triangles; union carefully.",0),
+R("Smallest String With Swaps","1202",1,"union_find","am","Swappable indices form components; sort each.",0),
+R("Regions Cut by Slashes","959",1,"union_find","am","Split each cell into four triangles; union carefully.",0),
 R("Redundant Connection II","685",2,"union_find","am","Separate the two-root case from the cycle case.",0),
 R("Checking Existence of Edge Length Limited Paths","1697",2,"union_find","am","Sort queries by limit; union as edges unlock.",0)
 ]},
@@ -1112,11 +1116,11 @@ R("Coin Change","322",1,"knapsack_unb","agm","Fewest coins reaching each amount.
 R("Coin Change II","518",1,"knapsack_unb","am","Count combinations; mind the loop order.",1),
 R("Combination Sum IV","377",1,"knapsack_unb","am","Count ordered sequences — permutations.",0),
 R("Ones and Zeroes","474",1,"knapsack_2d","am","Knapsack with two capacity dimensions.",0),
-R("Maximum Value of K Coins From Piles","2218",1,"knapsack_unb","am","Prefix sums feed a knapsack over piles.",0),
+R("Maximum Value of K Coins From Piles","2218",2,"knapsack_unb","am","Prefix sums feed a knapsack over piles.",0),
 R("Profitable Schemes","879",2,"knapsack_2d","am","States: members used and profit earned.",0),
 R("Tallest Billboard","956",2,"knapsack_01","am","Track reachable differences of two rod sets.",0),
 R("Maximum Profit in Job Scheduling","1235",2,"dp_binsearch","am","Weighted interval scheduling with binary search.",0),
-R("Burst Balloons","1547",2,"dp_interval","agm","Choose the last balloon in each range.",1)
+R("Burst Balloons","312",2,"dp_interval","agm","Choose the last balloon in each range.",1)
 ]},
 {name:"Subsequence DP",key:"dp_subseq",phase:"Phase 12 · Dynamic Programming",brief:"LIS and LCS are the two axes of sequence comparison: order-preservation within one sequence, alignment across two.",rows:[
 R("Longest Increasing Subsequence","300",1,"lis","agm","Extend the best chain ending at each index.",1),
@@ -1135,14 +1139,14 @@ R("Palindromic Substrings","647",1,"dp_string","agm","Count the centers that exp
 R("Edit Distance","72",1,"edit_distance_dp","agm","Insert, delete, replace — pick the cheapest.",1),
 R("Interleaving String","97",1,"dp_2d","am","Two pointers advance against one target.",0),
 R("Distinct Subsequences","115",2,"dp_2d","am","Count ways to consume s toward t.",0),
-R("Minimum Insertion Steps to Make a String Palindrome","1312",1,"dp_string","am","n minus the longest palindromic subsequence.",0),
+R("Minimum Insertion Steps to Make a String Palindrome","1312",2,"dp_string","am","n minus the longest palindromic subsequence.",0),
 R("Palindrome Partitioning II","132",2,"dp_string","am","Cheapest cut per prefix using palindrome checks.",0)
 ]},
 {name:"Advanced DP",key:"dp_adv",phase:"Phase 12 · Dynamic Programming",brief:"Regex tables, game-minimax, memoized DFS over sparse states — where the DP mindset gets stress-tested on interview favorites.",rows:[
 R("Regular Expression Matching","10",2,"dp_string","agm","Match-star states between two pointers.",1),
 R("Wildcard Matching","44",2,"dp_string","am","Same table; simpler star semantics.",0),
 R("Longest Valid Parentheses","32",2,"dp_1d","agm","Count validity endings in a stack-flavored DP.",1),
-R("Count Vowels Permutation","1220",1,"dp_1d","am","Follow the letter-adjacency rules per length.",0),
+R("Count Vowels Permutation","1220",2,"dp_1d","am","Follow the letter-adjacency rules per length.",0),
 R("Max Dot Product of Two Subsequences","1458",2,"lcs","am","LCS-style table with a take-pair branch.",0),
 R("Frog Jump","403",2,"dp_memo_dfs","am","Memoize reachable (stone, jump) states.",0),
 R("Minimum Difficulty of a Job Schedule","1335",2,"dp_1d","am","Partition days into d intervals, tracking maxima.",0),
@@ -1160,7 +1164,7 @@ R("Bitwise AND of Numbers Range","201",1,"bit_manip","am","The common prefix of 
 R("Sum of Two Integers","371",1,"bit_manip","agm","XOR adds; AND shifted carries.",1),
 R("Single Number II","137",1,"bit_count","am","Count ones per bit position modulo three.",0),
 R("Single Number III","260",1,"bit_xor","am","Split all numbers by a distinguishing bit.",0),
-R("Divide Two Integers","29",2,"bit_manip","am","Subtract doubled divisors using shifts.",0)
+R("Divide Two Integers","29",1,"bit_manip","am","Subtract doubled divisors using shifts.",0)
 ]},
 {name:"Tries",key:"trie",phase:"Phase 14 · Tries",brief:"A node per character step turns prefix queries into O(L) walks — and pairs beautifully with DFS, heaps, and greedy bit-divergence.",rows:[
 R("Implement Trie (Prefix Tree)","208",1,"trie","agm","Branch per character; mark word ends.",1),
@@ -1181,7 +1185,7 @@ R("Count of Smaller Numbers After Self","315",2,"fenwick","agm","Query counts of
 R("Count of Range Sum","327",2,"fenwick","am","Prefix sums plus a BIT over compressed values.",0),
 R("Reverse Pairs","493",2,"merge_sort","am","Count cross pairs while merge sorting.",0),
 R("Create Sorted Array Through Instructions","1649",2,"fenwick","am","Insert cost = min(smaller, larger) via a BIT.",0),
-R("Find the Longest Valid Obstacles Course at Each Position","1964",2,"lis","am","Longest non-decreasing subsequence with a BIT.",0),
+R("Find the Longest Valid Obstacle Course at Each Position","1964",2,"lis","am","Longest non-decreasing subsequence with a BIT.",0),
 R("Maximum Performance of a Team","1383",2,"heap_greedy","am","Sort by efficiency; maintain a heap of speeds.",0),
 R("IPO","502",2,"two_heaps","am","Spend capital on the best affordable profits.",0),
 R("Number of Submatrices That Sum to Target","1074",2,"prefix_map","agm","Fix row pairs; reduce to Subarray Sum K.",1),
@@ -1189,144 +1193,504 @@ R("Shortest Palindrome","214",2,"kmp","am","The failure function finds the added
 R("Longest Happy Prefix","1392",2,"kmp","am","The failure function is the border table.",0)
 ]},
 {name:"SQL Fundamentals",key:"sql_fundamentals",phase:"SQL Phase 1 · Fundamentals",brief:"The floor: SELECT, WHERE, DISTINCT, ORDER BY, NULL handling and the first group-by — every later phase is this phase with more moving parts.",rows:[
- R("Big Countries","595",0,"filter","","Filter rows on multiple conditions and order the survivors.",0),
- R("Find Customer Referee","584",0,"null_handling","","Reason about NULL the moment a foreign key can be absent.",0),
- R("Recyclable and Low Fat Products","1908",0,"filter","","Combine boolean columns into a single WHERE decision.",0),
- R("Invalid Tweets","1827",0,"filter","","Judge every row with a string length inside a filter.",0),
- R("Find Users with High Token Usage","4195",0,"filter","","Pull rows satisfying a numeric threshold on a single column.",0),
- R("Article Views I","1258",0,"distinct","","Deduplicate a result set while filtering on the row itself.",0),
- R("Find Followers Count","1877",0,"distinct","","Count distinct followers per account without double counting.",0),
- R("Number of Unique Subjects Taught by Each Teacher","2495",0,"distinct","","COUNT(DISTINCT …) inside a GROUP BY — the canonical dedupe count.",0),
- R("Game Play Analysis I","1179",0,"aggregate","","Group rows and take the earliest value per group.",0),
- R("The Latest Login in 2020","2041",0,"date_func","","Filter to a year, then keep the newest login per account.",0)
+R("Big Countries","595",0,"filter","","Filter rows on multiple conditions and order the survivors.",0),
+R("Find Customer Referee","584",0,"null_handling","","Reason about NULL the moment a foreign key can be absent.",0),
+R("Recyclable and Low Fat Products","1757",0,"filter","","Combine boolean columns into a single WHERE decision.",0),
+R("Invalid Tweets","1683",0,"filter","","Judge every row with a string length inside a filter.",0),
+R("Find Users with High Token Usage","3793",0,"filter","","Pull rows satisfying a numeric threshold on a single column.",0),
+R("Article Views I","1148",0,"distinct","","Deduplicate a result set while filtering on the row itself.",0),
+R("Find Followers Count","1729",0,"distinct","","Count distinct followers per account without double counting.",0),
+R("Number of Unique Subjects Taught by Each Teacher","2356",0,"distinct","","COUNT(DISTINCT …) inside a GROUP BY — the canonical dedupe count.",0),
+R("Game Play Analysis I","511",0,"aggregate","","Group rows and take the earliest value per group.",0),
+R("The Latest Login in 2020","1890",0,"date_func","","Filter to a year, then keep the newest login per account.",0)
 ]},
 {name:"Aggregation & GROUP BY",key:"sql_groupby",phase:"SQL Phase 2 · Aggregation",brief:"One row per group: COUNT, SUM, AVG, conditional aggregates, and HAVING that vetoes whole groups after they are built.",rows:[
- R("Daily Leads and Partners","1837",0,"distinct","","Count distinct partners and leads inside one grouped query.",0),
- R("Find Total Time Spent by Each Employee","1892",0,"aggregate","","Sum durations after normalizing a start/end pair per row.",0),
- R("Project Employees I","1161",0,"aggregate","","Average per group after joining two tables.",0),
- R("Percentage of Users Attended a Contest","1773",0,"aggregate","","Derive a percentage from counts, then order with ties.",0),
- R("Queries Quality and Percentage","1338",0,"conditional_agg","","Build a quality metric from count and sum in one grouping.",0),
- R("Classes With at Least 5 Students","596",0,"having","","HAVING narrows the groups that survive aggregation.",0),
- R("Bank Account Summary II","1734",0,"having","","Put a threshold on the aggregate, not on the rows.",0),
- R("Customers Who Bought All Products","1135",1,"having","","Compare per-group distinct counts against a global total.",0),
- R("Sales Analysis III","1174",0,"conditional_agg","","Bracket a group's min and max dates to prove a window.",0),
- R("Capital Gain/Loss","1523",1,"conditional_agg","","Turn signed events into a per-stock capital figure.",0)
+R("Daily Leads and Partners","1693",0,"distinct","","Count distinct partners and leads inside one grouped query.",0),
+R("Find Total Time Spent by Each Employee","1741",0,"aggregate","","Sum durations after normalizing a start/end pair per row.",0),
+R("Project Employees I","1075",0,"aggregate","","Average per group after joining two tables.",0),
+R("Percentage of Users Attended a Contest","1633",0,"aggregate","","Derive a percentage from counts, then order with ties.",0),
+R("Queries Quality and Percentage","1211",0,"conditional_agg","","Build a quality metric from count and sum in one grouping.",0),
+R("Classes With at Least 5 Students","596",0,"having","","HAVING narrows the groups that survive aggregation.",0),
+R("Bank Account Summary II","1587",0,"having","","Put a threshold on the aggregate, not on the rows.",0),
+R("Customers Who Bought All Products","1045",1,"having","","Compare per-group distinct counts against a global total.",0),
+R("Sales Analysis III","1084",0,"conditional_agg","","Bracket a group's min and max dates to prove a window.",0),
+R("Capital Gain/Loss","1393",1,"conditional_agg","","Turn signed events into a per-stock capital figure.",0)
 ]},
 {name:"Joins & Relationships",key:"sql_joins",phase:"SQL Phase 3 · Joins",brief:"Relations meet: INNER, LEFT, self, multi-table and two-sided joins. Choosing the driving table is half the query.",rows:[
- R("Combine Two Tables","175",0,"left_join","","LEFT JOIN keeps every row of the driving table.",0),
- R("Replace Employee ID With The Unique Identifier","1509",0,"left_join","","LEFT JOIN with a padding table that may be missing.",0),
- R("Customer Who Visited but Did Not Make Any Transactions","1724",0,"left_join","","Nulls exposed by a LEFT JOIN reveal absent rows.",0),
- R("Employee Bonus","577",0,"left_join","","Filter on the joined side after a LEFT JOIN.",0),
- R("Average Time of Process per Machine","1801",0,"self_join","","Join a table to itself to pair two events per entity.",0),
- R("Employees Earning More Than Their Managers","181",0,"self_join","","A self join compares each row with a related row.",0),
- R("Employees Whose Manager Left the Company","2127",0,"self_join","","Related-row existence checked through the same table.",0),
- R("Tree Node","608",1,"self_join","","Classify each node by what references it and what it references.",0),
- R("Employees With Missing Information","2110",0,"multi_join","","Symmetric completeness — two one-sided joins unioned.",0),
- R("Students and Examinations","1415",0,"multi_join","","Cross product of two masters, then a left join of fact rows.",0),
- R("Average Selling Price","1390",0,"join","","Join with a date-window predicate and a weighted average.",0),
- R("Find Category Recommendation Pairs","3891",2,"self_join","","Recommendation pairs need self joins and pair de-duplication.",0),
- R("Confirmation Rate","2087",1,"left_join","","Left join plus a per-group conditional share.",0),
- R("Find Product Recommendation Pairs","3865",1,"self_join","","Enumerate unordered pairs from one table.",0),
- R("Most Common Course Pairs","4169",2,"self_join","","Pair counting with a self join and deduplicated pairs.",0)
+R("Combine Two Tables","175",0,"left_join","","LEFT JOIN keeps every row of the driving table.",0),
+R("Replace Employee ID With The Unique Identifier","1378",0,"left_join","","LEFT JOIN with a padding table that may be missing.",0),
+R("Customer Who Visited but Did Not Make Any Transactions","1581",0,"left_join","","Nulls exposed by a LEFT JOIN reveal absent rows.",0),
+R("Employee Bonus","577",0,"left_join","","Filter on the joined side after a LEFT JOIN.",0),
+R("Average Time of Process per Machine","1661",0,"self_join","","Join a table to itself to pair two events per entity.",0),
+R("Employees Earning More Than Their Managers","181",0,"self_join","","A self join compares each row with a related row.",0),
+R("Employees Whose Manager Left the Company","1978",0,"self_join","","Related-row existence checked through the same table.",0),
+R("Tree Node","608",1,"self_join","","Classify each node by what references it and what it references.",0),
+R("Employees With Missing Information","1965",0,"multi_join","","Symmetric completeness — two one-sided joins unioned.",0),
+R("Students and Examinations","1280",0,"multi_join","","Cross product of two masters, then a left join of fact rows.",0),
+R("Average Selling Price","1251",0,"join","","Join with a date-window predicate and a weighted average.",0),
+R("Find Category Recommendation Pairs","3554",2,"self_join","","Recommendation pairs need self joins and pair de-duplication.",0),
+R("Confirmation Rate","1934",1,"left_join","","Left join plus a per-group conditional share.",0),
+R("Find Product Recommendation Pairs","3521",1,"self_join","","Enumerate unordered pairs from one table.",0),
+R("Most Common Course Pairs","3764",2,"self_join","","Pair counting with a self join and deduplicated pairs.",0)
 ]},
 {name:"Subqueries & Set Logic",key:"sql_subqueries",phase:"SQL Phase 4 · Subqueries",brief:"Nested thinking: scalar subqueries, correlated subqueries, EXISTS / NOT EXISTS, derived tables and UNION.",rows:[
- R("Customers Who Never Order","183",0,"exists","","Negation expressed as a missing related row.",0),
- R("Biggest Single Number","619",0,"subquery","","A subquery isolates the rows worth aggregating.",0),
- R("Customer Placing the Largest Number of Orders","586",0,"subquery","","Compute the maximum count, then replay the comparison.",0),
- R("Sales Person","607",0,"exists","","NOT EXISTS encodes 'no related row satisfies X'.",0),
- R("Managers with at Least 5 Direct Reports","570",1,"subquery","","A subquery count drives the join-back to managers.",0),
- R("Second Highest Salary","176",1,"subquery","","Second-highest is an ordering position, not a MAX.",0),
- R("Nth Highest Salary","177",1,"subquery","","Generalize the offset into a parameterized position.",0),
- R("Product Sales Analysis III","1155",1,"subquery","","Identify the qualifying window via a per-product minimum.",0),
- R("Product Price at a Given Date","1278",1,"correlated","","A correlated subquery picks the latest row per key.",0),
- R("Friend Requests II: Who Has the Most Friends","602",1,"derived","","Union two directions, then find the top of the merged set.",0),
- R("Trips and Users","262",2,"correlated","","A correlated ratio inside a bounded time window.",0),
- R("Movie Rating","1480",1,"derived","","Two disjoint rankings, one result set.",0)
+R("Customers Who Never Order","183",0,"exists","","Negation expressed as a missing related row.",0),
+R("Biggest Single Number","619",0,"subquery","","A subquery isolates the rows worth aggregating.",0),
+R("Customer Placing the Largest Number of Orders","586",0,"subquery","","Compute the maximum count, then replay the comparison.",0),
+R("Sales Person","607",0,"exists","","NOT EXISTS encodes 'no related row satisfies X'.",0),
+R("Managers with at Least 5 Direct Reports","570",1,"subquery","","A subquery count drives the join-back to managers.",0),
+R("Second Highest Salary","176",1,"subquery","","Second-highest is an ordering position, not a MAX.",0),
+R("Nth Highest Salary","177",1,"subquery","","Generalize the offset into a parameterized position.",0),
+R("Product Sales Analysis III","1070",1,"subquery","","Identify the qualifying window via a per-product minimum.",0),
+R("Product Price at a Given Date","1164",1,"correlated","","A correlated subquery picks the latest row per key.",0),
+R("Friend Requests II: Who Has the Most Friends","602",1,"derived","","Union two directions, then find the top of the merged set.",0),
+R("Trips and Users","262",2,"correlated","","A correlated ratio inside a bounded time window.",0),
+R("Movie Rating","1341",1,"derived","","Two disjoint rankings, one result set.",0)
 ]},
 {name:"CASE & Conditional Logic",key:"sql_case",phase:"SQL Phase 5 · Conditional Logic",brief:"Branching rows: CASE WHEN, conditional aggregation, pivots and NULL-respecting logic.",rows:[
- R("Swap Sex of Employees","627",0,"case_when","","CASE flips a value in an UPDATE statement.",0),
- R("Calculate Special Bonus","2024",0,"case_when","","Conditional column computation with NULL-respecting logic.",0),
- R("Reformat Department Table","1301",0,"conditional_agg","","Pivot categories into columns with conditional aggregation.",0),
- R("Count Salary Categories","2057",1,"case_when","","Force every category to exist even when its count is zero.",0),
- R("Odd and Even Transactions","3530",1,"case_when","","Partition rows by parity through conditional sums.",0),
- R("Find Books with No Available Copies","3910",0,"null_handling","","Absence of a related row is the answer itself.",0),
- R("Find Books with Polarized Opinions","3996",1,"conditional_agg","","Classify each review, then argue from the group totals.",0),
- R("Monthly Transactions I","1317",1,"conditional_agg","","Two mutually exclusive flags aggregated per month.",0),
- R("Immediate Food Delivery II","1292",1,"conditional_agg","","Ratio of a per-group first event — one join and a CASE.",0)
+R("Swap Sex of Employees","627",0,"case_when","","CASE flips a value in an UPDATE statement.",0),
+R("Calculate Special Bonus","1873",0,"case_when","","Conditional column computation with NULL-respecting logic.",0),
+R("Reformat Department Table","1179",0,"conditional_agg","","Pivot categories into columns with conditional aggregation.",0),
+R("Count Salary Categories","1907",1,"case_when","","Force every category to exist even when its count is zero.",0),
+R("Odd and Even Transactions","3220",1,"case_when","","Partition rows by parity through conditional sums.",0),
+R("Find Books with No Available Copies","3570",0,"null_handling","","Absence of a related row is the answer itself.",0),
+R("Find Books with Polarized Opinions","3642",1,"conditional_agg","","Classify each review, then argue from the group totals.",0),
+R("Monthly Transactions I","1193",1,"conditional_agg","","Two mutually exclusive flags aggregated per month.",0),
+R("Immediate Food Delivery II","1174",1,"conditional_agg","","Ratio of a per-group first event — one join and a CASE.",0)
 ]},
 {name:"Strings, Dates & Numbers",key:"sql_functions",phase:"SQL Phase 6 · Functions",brief:"Text, time and numbers: concatenation, regex, date parts and arithmetic — validation and reshaping.",rows:[
- R("Fix Names in a Table","1811",0,"string_func","","Compose string functions to normalize a name.",0),
- R("Group Sold Products By The Date","1625",0,"string_func","","Concatenate item names inside a group, sorted.",0),
- R("Patients With a Condition","1670",0,"string_func","","A pattern in the middle of a string — boundary matters.",0),
- R("Find Users With Valid E-Mails","1664",0,"string_func","","Validate a full token against a pattern.",0),
- R("Find Valid Emails","3782",0,"string_func","","Regex with anchors separates valid from recoverable emails.",0),
- R("Find Products with Valid Serial Numbers","3803",0,"string_func","","Pattern repetition expressed in a serial-number check.",0),
- R("First Letter Capitalization II","3711",2,"string_func","","Split-casing a string after punctuation.",0),
- R("Find Invalid IP Addresses","3792",2,"string_func","","Strict field validation of four octets.",0),
- R("User Activity for the Past 30 Days I","1245",0,"date_func","","Date arithmetic scopes a distinct-count window.",0),
- R("Triangle Judgement","610",0,"numeric_func","","Compare three values under triangle inequalities.",0)
+R("Fix Names in a Table","1667",0,"string_func","","Compose string functions to normalize a name.",0),
+R("Group Sold Products By The Date","1484",0,"string_func","","Concatenate item names inside a group, sorted.",0),
+R("Patients With a Condition","1527",0,"string_func","","A pattern in the middle of a string — boundary matters.",0),
+R("Find Users With Valid E-Mails","1517",0,"string_func","","Validate a full token against a pattern.",0),
+R("Find Valid Emails","3436",0,"string_func","","Regex with anchors separates valid from recoverable emails.",0),
+R("Find Products with Valid Serial Numbers","3465",0,"string_func","","Pattern repetition expressed in a serial-number check.",0),
+R("First Letter Capitalization II","3374",2,"string_func","","Split-casing a string after punctuation.",0),
+R("Find Invalid IP Addresses","3451",2,"string_func","","Strict field validation of four octets.",0),
+R("User Activity for the Past 30 Days I","1141",0,"date_func","","Date arithmetic scopes a distinct-count window.",0),
+R("Triangle Judgement","610",0,"numeric_func","","Compare three values under triangle inequalities.",0)
 ]},
 {name:"Window Functions",key:"sql_window",phase:"SQL Phase 7 · Window Functions",brief:"Order-dependent computation: RANK / DENSE_RANK, ROW_NUMBER, LAG / LEAD, running totals and rolling windows.",rows:[
- R("Primary Department for Each Employee","1942",0,"rank","","First row per group — a ranking question in disguise.",0),
- R("Rank Scores","178",1,"rank","","Ties share a rank; DENSE_RANK defines it.",0),
- R("Department Highest Salary","184",1,"rank","","Max per group, then filter the members that achieve it.",0),
- R("Department Top Three Salaries","185",2,"rank","","Top-N per department is per-group ranking.",0),
- R("Exchange Seats","626",1,"lag_lead","","Every row pairs with its neighbor — think in offsets.",0),
- R("Restaurant Growth","1452",1,"running_total","","Rolling aggregates over a fixed preceding window.",0),
- R("Find Students Who Improved","3767",1,"lag_lead","","Compare each row with its ordered predecessor.",0),
- R("Find Drivers with Improved Fuel Efficiency","3942",1,"lag_lead","","Consecutive improvement needs a running comparison.",0),
- R("Find COVID Recovery Patients","3932",1,"lag_lead","","Recovery is a date-gap test across consecutive visits.",0),
- R("Find Golden Hour Customers","4091",1,"time_series","","Inter-arrival time between a customer's orders.",0),
- R("Seasonal Sales Analysis","3898",1,"running_total","","Periodic aggregation compared across seasons.",0)
+R("Primary Department for Each Employee","1789",0,"rank","","First row per group — a ranking question in disguise.",0),
+R("Rank Scores","178",1,"rank","","Ties share a rank; DENSE_RANK defines it.",0),
+R("Department Highest Salary","184",1,"rank","","Max per group, then filter the members that achieve it.",0),
+R("Department Top Three Salaries","185",2,"rank","","Top-N per department is per-group ranking.",0),
+R("Exchange Seats","626",1,"lag_lead","","Every row pairs with its neighbor — think in offsets.",0),
+R("Restaurant Growth","1321",1,"running_total","","Rolling aggregates over a fixed preceding window.",0),
+R("Find Students Who Improved","3421",1,"lag_lead","","Compare each row with its ordered predecessor.",0),
+R("Find Drivers with Improved Fuel Efficiency","3601",1,"lag_lead","","Consecutive improvement needs a running comparison.",0),
+R("Find COVID Recovery Patients","3586",1,"lag_lead","","Recovery is a date-gap test across consecutive visits.",0),
+R("Find Golden Hour Customers","3705",1,"time_series","","Inter-arrival time between a customer's orders.",0),
+R("Seasonal Sales Analysis","3564",1,"running_total","","Periodic aggregation compared across seasons.",0)
 ]},
 {name:"Advanced Analytical SQL",key:"sql_advanced",phase:"SQL Phase 8 · Advanced Analytics",brief:"Consecutive records, gaps and islands, retention and deduplication — the queries interviewers actually write.",rows:[
- R("Duplicate Emails","182",0,"dedupe","","Grouping exposes values that repeat.",0),
- R("Delete Duplicate Emails","196",0,"dedupe","","Deletion that must keep exactly one survivor per group.",0),
- R("Rising Temperature","197",0,"time_series","","Comparing a row with yesterday via the table's own join.",0),
- R("Game Play Analysis IV","1182",1,"time_series","","Retention is next-day login following first login.",0),
- R("Consecutive Numbers","180",1,"gaps_islands","","Three consecutive equal values — sliding membership.",0),
- R("Human Traffic of Stadium","601",2,"gaps_islands","","Consecutive rows of at least length three.",0),
- R("Find Overbooked Employees","3943",1,"time_series","","Overlap detection between intervals of the same person.",0),
- R("Find Stores with Inventory Imbalance","3971",1,"time_series","","Spot irregular stock levels with per-attribute logic.",0),
- R("Investments in 2016","585",1,"correlated","","Two conditions across different rows of the same table.",0),
- R("Actors and Directors Who Cooperated At Least Three Times","1136",0,"having","","Cooperators repeat — count shared projects.",0),
- R("Find Consistently Improving Employees","3921",1,"time_series","","Consistent improvement is a run of neighbor comparisons.",0)
+R("Duplicate Emails","182",0,"dedupe","","Grouping exposes values that repeat.",0),
+R("Delete Duplicate Emails","196",0,"dedupe","","Deletion that must keep exactly one survivor per group.",0),
+R("Rising Temperature","197",0,"time_series","","Comparing a row with yesterday via the table's own join.",0),
+R("Game Play Analysis IV","550",1,"time_series","","Retention is next-day login following first login.",0),
+R("Consecutive Numbers","180",1,"gaps_islands","","Three consecutive equal values — sliding membership.",0),
+R("Human Traffic of Stadium","601",2,"gaps_islands","","Consecutive rows of at least length three.",0),
+R("Find Overbooked Employees","3611",1,"time_series","","Overlap detection between intervals of the same person.",0),
+R("Find Stores with Inventory Imbalance","3626",1,"time_series","","Spot irregular stock levels with per-attribute logic.",0),
+R("Investments in 2016","585",1,"correlated","","Two conditions across different rows of the same table.",0),
+R("Actors and Directors Who Cooperated At Least Three Times","1050",0,"having","","Cooperators repeat — count shared projects.",0),
+R("Find Consistently Improving Employees","3580",1,"time_series","","Consistent improvement is a run of neighbor comparisons.",0)
 ]},
 {name:"CTEs & Recursive SQL",key:"sql_cte",phase:"SQL Phase 9 · CTEs & Recursion",brief:"Staging complexity: CTEs that decompose a problem, and recursion for hierarchies and self-referential data.",rows:[
- R("Analyze Organization Hierarchy","3828",2,"recursive_cte","","Self-referential rows travel up a hierarchy.",0),
- R("Analyze Subscription Conversion","3848",1,"cte","","Conversion funnel: stage counts feeding the next stage.",0),
- R("Find Loyal Customers","4025",1,"cte","","Consecutive activity across months for one customer.",0),
- R("Find Zombie Sessions","4043",2,"cte","","Sessionize events by their gaps in time.",0),
- R("Find Churn Risk Customers","4103",1,"cte","","Distance from the customer's last activity signals churn.",0),
- R("Find Emotionally Consistent Users","4208",1,"cte","","Consistency is measured across sequential periods.",0),
- R("Find Users with Persistent Behavior Patterns","4227",2,"cte","","Persistent behavior means a pattern, not an exception.",0)
+R("Analyze Organization Hierarchy","3482",2,"recursive_cte","","Self-referential rows travel up a hierarchy.",0),
+R("Analyze Subscription Conversion","3497",1,"cte","","Conversion funnel: stage counts feeding the next stage.",0),
+R("Find Loyal Customers","3657",1,"cte","","Consecutive activity across months for one customer.",0),
+R("Find Zombie Sessions","3673",2,"cte","","Sessionize events by their gaps in time.",0),
+R("Find Churn Risk Customers","3716",1,"cte","","Distance from the customer's last activity signals churn.",0),
+R("Find Emotionally Consistent Users","3808",1,"cte","","Consistency is measured across sequential periods.",0),
+R("Find Users with Persistent Behavior Patterns","3832",2,"cte","","Persistent behavior means a pattern, not an exception.",0)
 ]},
 {name:"Real-World Interview SQL",key:"sql_interview",phase:"SQL Phase 10 · Interview SQL",brief:"Business metrics: sales, users, employees, products — join the patterns into realistic reporting queries.",rows:[
- R("Not Boring Movies","620",0,"filter","","Oddness and inequality combine in one filter.",0),
- R("Product Sales Analysis I","1153",0,"join","","Report a join with a grouping on the driving side.",0),
- R("Top Travellers","1541",0,"left_join","","LEFT JOIN, group, and COALESCE keep everyone listed.",0),
- R("The Number of Employees Which Report to Each Employee","1882",0,"self_join","","Self join, then count down the reporting chain.",0),
- R("Rearrange Products Table","1948",0,"derived","","Unpivot one row into several via UNION.",0)
+R("Not Boring Movies","620",0,"filter","","Oddness and inequality combine in one filter.",0),
+R("Product Sales Analysis I","1068",0,"join","","Report a join with a grouping on the driving side.",0),
+R("Top Travellers","1407",0,"left_join","","LEFT JOIN, group, and COALESCE keep everyone listed.",0),
+R("The Number of Employees Which Report to Each Employee","1731",0,"self_join","","Self join, then count down the reporting chain.",0),
+R("Rearrange Products Table","1795",0,"derived","","Unpivot one row into several via UNION.",0)
 ]},
+{name:"Added · Lists & Trees",key:"added_lists_trees",phase:"Phase 16 · Gap Fillers",brief:"Pointer discipline and tree traversal, appended as targeted gap-fillers after the main roadmap.",rows:[
+R("Linked List Cycle II","142",1,"fast_slow","","Meet fast and slow, then restart one pointer at the head to find the cycle entry.",0),
+R("Palindrome Linked List","234",0,"linked_reverse","","Reverse the second half in place, then compare the two runs node by node.",0),
+R("Reverse Linked List II","92",1,"linked_reverse","","Reverse only the sublist between m and n, then relink its two boundaries.",0),
+R("Remove Linked List Elements","203",0,"dummy_node","","Use a dummy head so deleting the head is never a special case.",0),
+R("Remove Duplicates from Sorted List","83",0,"dummy_node","","Keep one node per value while walking the sorted chain.",0),
+R("Symmetric Tree","101",0,"tree_dfs","","Compare left and right subtrees as mirror images.",0),
+R("Binary Tree Inorder Traversal","94",0,"tree_dfs","","Visit left, node, right; an explicit stack avoids recursion depth limits.",0),
+R("Minimum Depth of Binary Tree","111",0,"tree_bfs","","Level-order BFS stops at the first leaf, which is the minimum depth.",0),
+R("Populating Next Right Pointers in Each Node II","117",1,"tree_bfs","","Link each level with a dummy next-head even when the tree is incomplete.",0),
+R("Unique Binary Search Trees","96",1,"dp_1d","","Catalan recurrence: each root splits the remaining keys into left and right.",0),
+R("Binary Search Tree Iterator","173",1,"bst_inorder","","Controlled inorder with a stack of left spines makes next() amortized O(1).",0)
+]},
+{name:"Added · Design, Math & Strings",key:"added_design_math_strings",phase:"Phase 16 · Gap Fillers",brief:"Data-structure design, integer math, and string simulation to round out the core toolkit.",rows:[
+R("Insert Delete GetRandom O(1)","380",1,"design","","Combine an array with a value-to-index map; swap-remove for O(1) deletion.",0),
+R("LFU Cache","460",2,"design","","Track frequency buckets and a min-frequency pointer; evict the LRU inside the least bucket.",0),
+R("Design Browser History","1472",1,"design","","Keep a back stack and a forward stack; a new visit clears forward.",0),
+R("Reverse Integer","7",1,"simulation","","Pop digits and rebuild with overflow guards before multiplying by ten.",0),
+R("Palindrome Number","9",0,"simulation","","Reverse only half the digits and compare, avoiding overflow entirely.",0),
+R("Happy Number","202",0,"fast_slow","","Repeated digit-square sums form a cycle; detect it with fast and slow pointers.",0),
+R("Add Binary","67",0,"simulation","","Add from the right with a carry, then reverse the StringBuilder.",0),
+R("Add Strings","415",0,"simulation","","Simulate column addition with two pointers and a carry variable.",0),
+R("Reverse String","344",0,"two_pointers","","Swap the two ends inward in place until they meet.",0),
+R("Find the Index of the First Occurrence in a String","28",0,"kmp","","KMP's failure table skips redundant comparisons on a mismatch.",0),
+R("Zigzag Conversion","6",1,"simulation","","Write characters into row buckets following the down-up zigzag period.",0)
+]},
+{name:"Added · Arrays, Search & Greedy",key:"added_arrays_search_greedy",phase:"Phase 16 · Gap Fillers",brief:"Window, prefix, binary-search-on-answer, and greedy drills that reinforce Phase 1–7 instincts.",rows:[
+R("Subarray Product Less Than K","713",1,"sliding_window","","Shrink a window while the product is too large; every valid right edge adds its width.",0),
+R("Subarray Sums Divisible by K","974",1,"prefix_map","","Count prefix sums with the same remainder; equal remainders form divisible subarrays.",0),
+R("Pascal's Triangle II","119",0,"simulation","","Build one row in place from right to left using the previous row's values.",0),
+R("Sort an Array","912",1,"divide_conquer","","Merge sort gives guaranteed O(n log n) by merging sorted halves.",0),
+R("Find the Smallest Divisor Given a Threshold","1283",1,"bin_search_answer","","Binary search the divisor; the greedy sum check is monotone.",0),
+R("Minimum Number of Days to Make m Bouquets","1482",1,"bin_search_answer","","Binary search the day; greedily count adjacent bloomed groups.",0),
+R("Magnetic Force Between Two Balls","1552",1,"bin_search_answer","","Binary search the gap; place balls greedily at the first feasible position.",0),
+R("Assign Cookies","455",0,"greedy_sort","","Sort both arrays; give the smallest sufficient cookie to each child.",0),
+R("Lemonade Change","860",0,"greedy","","Track counts of 5s and 10s; make change with the largest bill first.",0),
+R("Valid Parenthesis String","678",1,"greedy","","Track the range of possible open counts; each star expands both ends.",0),
+R("Hand of Straights","846",1,"greedy_count","","Count values and greedily build straights from the smallest remaining card.",0),
+R("Online Stock Span","901",1,"monotonic_stack","","A monotonic stack stores price and span; pop smaller prices and absorb their spans.",0),
+R("Car Fleet","853",1,"monotonic_stack","","Sort by position; a car joins the fleet ahead when its arrival time is not earlier.",0),
+R("Backspace String Compare","844",0,"stack","","Walk both strings from the back, skipping characters erased by a hash mark.",0),
+R("Seat Reservation Manager","1845",1,"heap_greedy","","A min-heap of free seats; pop the smallest available seat on reserve.",0),
+R("Maximum Number of Events That Can Be Attended","1353",1,"heap_greedy","","Sort by start; each day attend the available event with the earliest end.",0),
+R("Hamming Distance","461",0,"bit_count","","XOR the two numbers, then count the set bits of the result.",0)
+]},
+{name:"Added · Graphs & DP",key:"added_graphs_dp",phase:"Phase 16 · Gap Fillers",brief:"Grid reachability, weighted shortest paths, and sequence DP variants that close common interview gaps.",rows:[
+R("Number of Closed Islands","1254",1,"matrix_dfs","","Flood-fill border land first; every remaining island is closed.",0),
+R("Number of Enclaves","1020",1,"matrix_dfs","","Flood-fill from the border; land cells left unvisited are enclosed.",0),
+R("Possible Bipartition","886",1,"bipartite","","Two-color the dislike graph; an odd cycle makes a partition impossible.",0),
+R("Swim in Rising Water","778",2,"dijkstra","","Dijkstra where the path cost is the maximum elevation along the way.",0),
+R("Find All Possible Recipes from Given Supplies","2115",1,"topo","","Topological sort over recipe dependencies, seeded by the available supplies.",0),
+R("Word Break II","140",2,"backtracking_prune","","Backtrack over dictionary prefixes with memoized suffix results.",0),
+R("Longest Palindromic Subsequence","516",1,"dp_string","","Interval DP: match the ends or drop one side.",0),
+R("Maximum Length of Repeated Subarray","718",1,"dp_2d","","2D DP matches suffixes; dp[i][j] extends dp[i-1][j-1] on equality.",0),
+R("Best Time to Buy and Sell Stock III","123",2,"dp_state","","Track four states: buy1, sell1, buy2, sell2 across prices.",0),
+R("Best Time to Buy and Sell Stock IV","188",2,"dp_state","","Generalize the state machine to k buy and sell pairs.",0),
+R("Best Time to Buy and Sell Stock with Transaction Fee","714",1,"dp_state","","Two states, hold and cash; subtract the fee when selling.",0),
+R("Stone Game","877",1,"dp_game","","Score-difference DP over intervals; the first player wins by parity.",0),
+R("Cherry Pickup","741",2,"dp_2d","","Two walkers move in lockstep; DP over rows and columns.",0),
+R("Minimum Cost to Cut a Stick","1547",2,"dp_interval","","Interval DP over sorted cut positions; choose the last cut in each segment.",0)
+]}
 ];
 
 const FINAL50=["1","15","121","3","76","424","239","560","33","153","875","206","146","84","20","739","105","236","124","297","98","230","23","295","39","79","51","55","763","56","435","200","133","417","207","547","743","787","684","198","322","416","300","1143","72","139","136","208","212","53"];
 const BLIND30=["128","543","424","49","438","560","162","875","142","739","863","547","785","310","684","621","647","377","300","131","279","416","1048","76","695","347","236","124","102","518"];
 const COMAP={a:"Amazon",g:"Google",m:"Microsoft",f:"Meta",d:"Adobe",p:"Apple",b:"Bloomberg",u:"Uber",l:"LinkedIn",t:"Atlassian",s:"Salesforce",o:"Oracle",q:"Qualcomm",n:"Nvidia",i:"Intuit",h:"Goldman Sachs",e:"Spotify",w:"Snap"};
-const SLUG_OV={"Pow(x, n)":"powx-n","Capital Gain/Loss":"capital-gainloss"};
-const slug=t=>SLUG_OV[t]||t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const SLUG_OV={
+  "Sqrt(x)":"sqrtx",
+  "Pow(x, n)":"powx-n",
+  "Pascal’s Triangle":"pascals-triangle",
+  "Pascal's Triangle":"pascals-triangle",
+  "Pascal’s Triangle II":"pascals-triangle-ii",
+  "Pascal's Triangle II":"pascals-triangle-ii",
+  "Longest Subarray of 1’s After Deleting One Element":"longest-subarray-of-1s-after-deleting-one-element",
+  "Longest Subarray of 1's After Deleting One Element":"longest-subarray-of-1s-after-deleting-one-element",
+  "Capital Gain/Loss":"capital-gainloss",
+  "Insert Delete GetRandom O(1)":"insert-delete-getrandom-o1",
+  "Insert Delete GetRandom O(1) - Duplicates allowed":"insert-delete-getrandom-o1-duplicates-allowed"
+};
+const NC_SLUG={
+  "4Sum":"4sum",
+  "Accounts Merge":"accounts-merge",
+  "Add Two Numbers":"add-two-numbers",
+  "As Far from Land as Possible":"as-far-from-land-as-possible",
+  "Asteroid Collision":"asteroid-collision",
+  "Bag of Tokens":"bag-of-tokens",
+  "Balanced Binary Tree":"balanced-binary-tree",
+  "Basic Calculator II":"basic-calculator-ii",
+  "Best Team With No Conflicts":"best-team-with-no-conflicts",
+  "Best Time to Buy and Sell Stock II":"best-time-to-buy-and-sell-stock-ii",
+  "Best Time to Buy and Sell Stock with Cooldown":"buy-and-sell-crypto-with-cooldown",
+  "Binary Search":"binary-search",
+  "Binary Tree Level Order Traversal":"level-order-traversal-of-binary-tree",
+  "Binary Tree Maximum Path Sum":"binary-tree-maximum-path-sum",
+  "Binary Tree Right Side View":"binary-tree-right-side-view",
+  "Binary Tree Zigzag Level Order Traversal":"binary-tree-zigzag-level-order-traversal",
+  "Bitwise AND of Numbers Range":"bitwise-and-of-numbers-range",
+  "Boats to Save People":"boats-to-save-people",
+  "Build a Matrix With Conditions":"build-a-matrix-with-conditions",
+  "Burst Balloons":"burst-balloons",
+  "Candy":"candy",
+  "Capacity To Ship Packages Within D Days":"capacity-to-ship-packages-within-d-days",
+  "Car Pooling":"car-pooling",
+  "Cherry Pickup II":"cherry-pickup-ii",
+  "Climbing Stairs":"climbing-stairs",
+  "Clone Graph":"clone-graph",
+  "Coin Change":"coin-change",
+  "Coin Change II":"coin-change-ii",
+  "Combination Sum":"combination-target-sum",
+  "Combination Sum II":"combination-target-sum-ii",
+  "Combination Sum IV":"combination-sum-iv",
+  "Combinations":"combinations",
+  "Construct Binary Tree from Inorder and Postorder Traversal":"construct-binary-tree-from-inorder-and-postorder-traversal",
+  "Construct Binary Tree from Preorder and Inorder Traversal":"binary-tree-from-preorder-and-inorder-traversal",
+  "Contains Duplicate II":"contains-duplicate-ii",
+  "Contiguous Array":"contiguous-array",
+  "Continuous Subarray Sum":"continuous-subarray-sum",
+  "Convert Sorted Array to Binary Search Tree":"convert-sorted-array-to-binary-search-tree",
+  "Count Good Nodes in Binary Tree":"count-good-nodes-in-binary-tree",
+  "Count Number of Nice Subarrays":"count-number-of-nice-subarrays",
+  "Count Primes":"count-primes",
+  "Count Vowels Permutation":"count-vowels-permutation",
+  "Count Ways to Build Good Strings":"count-ways-to-build-good-strings",
+  "Counting Bits":"counting-bits",
+  "Course Schedule":"course-schedule",
+  "Course Schedule II":"course-schedule-ii",
+  "Course Schedule IV":"course-schedule-iv",
+  "Custom Sort String":"custom-sort-string",
+  "Daily Temperatures":"daily-temperatures",
+  "Decode String":"decode-string",
+  "Decode Ways":"decode-ways",
+  "Delete and Earn":"delete-and-earn",
+  "Delete Node in a BST":"delete-node-in-a-bst",
+  "Design Circular Queue":"design-circular-queue",
+  "Design HashMap":"design-hashmap",
+  "Design Twitter":"design-twitter-feed",
+  "Detonate the Maximum Bombs":"detonate-the-maximum-bombs",
+  "Diameter of Binary Tree":"binary-tree-diameter",
+  "Different Ways to Add Parentheses":"different-ways-to-add-parentheses",
+  "Distribute Coins in Binary Tree":"distribute-coins-in-binary-tree",
+  "Edit Distance":"edit-distance",
+  "Evaluate Division":"evaluate-division",
+  "Evaluate Reverse Polish Notation":"evaluate-reverse-polish-notation",
+  "Find All Anagrams in a String":"find-all-anagrams-in-a-string",
+  "Find All Duplicates in an Array":"find-all-duplicates-in-an-array",
+  "Find All Numbers Disappeared in an Array":"find-all-numbers-disappeared-in-an-array",
+  "Find Eventual Safe States":"find-eventual-safe-states",
+  "Find First and Last Position of Element in Sorted Array":"find-first-and-last-position-of-element-in-sorted-array",
+  "Find K Closest Elements":"find-k-closest-elements",
+  "Find K-th Smallest Pair Distance":"find-k-th-smallest-pair-distance",
+  "Find Median from Data Stream":"find-median-in-a-data-stream",
+  "Find Minimum in Rotated Sorted Array":"find-minimum-in-rotated-sorted-array",
+  "Find Peak Element":"find-peak-element",
+  "Find Pivot Index":"find-pivot-index",
+  "Find the City With the Smallest Number of Neighbors at a Threshold Distance":"find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+  "Find the Difference":"find-the-difference",
+  "Find the Longest Valid Obstacle Course at Each Position":"find-the-longest-valid-obstacle-course-at-each-position",
+  "Find the Town Judge":"find-the-town-judge",
+  "First Missing Positive":"first-missing-positive",
+  "First Unique Character in a String":"first-unique-character-in-a-string",
+  "Flood Fill":"flood-fill",
+  "Frequency of the Most Frequent Element":"frequency-of-the-most-frequent-element",
+  "Furthest Building You Can Reach":"furthest-building-you-can-reach",
+  "Gas Station":"gas-station",
+  "Generate Parentheses":"generate-parentheses",
+  "Guess Number Higher or Lower":"guess-number-higher-or-lower",
+  "House Robber":"house-robber",
+  "House Robber II":"house-robber-ii",
+  "House Robber III":"house-robber-iii",
+  "Implement Queue using Stacks":"implement-queue-using-stacks",
+  "Implement Stack using Queues":"implement-stack-using-queues",
+  "Implement Trie (Prefix Tree)":"implement-prefix-tree",
+  "Insert Interval":"insert-new-interval",
+  "Insert into a Binary Search Tree":"insert-into-a-binary-search-tree",
+  "Integer Break":"integer-break",
+  "Integer to Roman":"integer-to-roman",
+  "Interleaving String":"interleaving-string",
+  "Intersection of Two Linked Lists":"intersection-of-two-linked-lists",
+  "Interval List Intersections":"interval-list-intersections",
+  "Invert Binary Tree":"invert-a-binary-tree",
+  "IPO":"ipo",
+  "Is Graph Bipartite?":"is-graph-bipartite",
+  "Island Perimeter":"island-perimeter",
+  "Isomorphic Strings":"isomorphic-strings",
+  "Jump Game":"jump-game",
+  "Jump Game II":"jump-game-ii",
+  "K Closest Points to Origin":"k-closest-points-to-origin",
+  "K-th Symbol in Grammar":"k-th-symbol-in-grammar",
+  "Koko Eating Bananas":"eating-bananas",
+  "Kth Largest Element in a Stream":"kth-largest-integer-in-a-stream",
+  "Kth Largest Element in an Array":"kth-largest-element-in-an-array",
+  "Largest Number":"largest-number",
+  "Largest Rectangle in Histogram":"largest-rectangle-in-histogram",
+  "Last Stone Weight":"last-stone-weight",
+  "Last Stone Weight II":"last-stone-weight-ii",
+  "Letter Combinations of a Phone Number":"combinations-of-a-phone-number",
+  "Longest Common Prefix":"longest-common-prefix",
+  "Longest Common Subsequence":"longest-common-subsequence",
+  "Longest Consecutive Sequence":"longest-consecutive-sequence",
+  "Longest Increasing Subsequence":"longest-increasing-subsequence",
+  "Longest Palindromic Substring":"longest-palindromic-substring",
+  "Longest Repeating Character Replacement":"longest-repeating-substring-with-replacement",
+  "Longest String Chain":"longest-string-chain",
+  "Longest Substring Without Repeating Characters":"longest-substring-without-duplicates",
+  "Lowest Common Ancestor of a Binary Tree":"lowest-common-ancestor-of-a-binary-tree",
+  "LRU Cache":"lru-cache",
+  "Majority Element":"majority-element",
+  "Majority Element II":"majority-element-ii",
+  "Making a Large Island":"making-a-large-island",
+  "Max Area of Island":"max-area-of-island",
+  "Max Consecutive Ones III":"max-consecutive-ones-iii",
+  "Maximal Square":"maximal-square",
+  "Maximum Depth of Binary Tree":"depth-of-binary-tree",
+  "Maximum Length of Pair Chain":"maximum-length-of-pair-chain",
+  "Maximum Performance of a Team":"maximum-performance-of-a-team",
+  "Maximum Points You Can Obtain from Cards":"maximum-points-you-can-obtain-from-cards",
+  "Maximum Product Subarray":"maximum-product-subarray",
+  "Maximum Profit in Job Scheduling":"maximum-profit-in-job-scheduling",
+  "Maximum Subarray":"maximum-subarray",
+  "Maximum Sum Circular Subarray":"maximum-sum-circular-subarray",
+  "Maximum Value of K Coins From Piles":"maximum-value-of-k-coins-from-piles",
+  "Median of Two Sorted Arrays":"median-of-two-sorted-arrays",
+  "Merge Intervals":"merge-intervals",
+  "Merge Sorted Array":"merge-sorted-array",
+  "Middle of the Linked List":"middle-of-the-linked-list",
+  "Min Cost Climbing Stairs":"min-cost-climbing-stairs",
+  "Minimum Cost For Tickets":"minimum-cost-for-tickets",
+  "Minimum Cost to Make at Least One Valid Path in a Grid":"minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+  "Minimum Deletions to Make Character Frequencies Unique":"minimum-deletions-to-make-character-frequencies-unique",
+  "Minimum Difficulty of a Job Schedule":"minimum-difficulty-of-a-job-schedule",
+  "Minimum Falling Path Sum":"minimum-falling-path-sum",
+  "Minimum Height Trees":"minimum-height-trees",
+  "Minimum Number of Arrows to Burst Balloons":"minimum-number-of-arrows-to-burst-balloons",
+  "Minimum Path Sum":"minimum-path-sum",
+  "Minimum Size Subarray Sum":"minimum-size-subarray-sum",
+  "Missing Number":"missing-number",
+  "Move Zeroes":"move-zeroes",
+  "Multiply Strings":"multiply-strings",
+  "My Calendar I":"my-calendar-i",
+  "My Calendar II":"my-calendar-ii",
+  "N-Queens":"n-queens",
+  "N-Queens II":"n-queens-ii",
+  "N-th Tribonacci Number":"n-th-tribonacci-number",
+  "Network Delay Time":"network-delay-time",
+  "Next Greater Element I":"next-greater-element-i",
+  "Next Permutation":"next-permutation",
+  "Non-overlapping Intervals":"non-overlapping-intervals",
+  "Number of 1 Bits":"number-of-one-bits",
+  "Number of Flowers in Full Bloom":"number-of-flowers-in-full-bloom",
+  "Number of Islands":"count-number-of-islands",
+  "Number of Longest Increasing Subsequence":"number-of-longest-increasing-subsequence",
+  "Number of Provinces":"number-of-provinces",
+  "Number of Submatrices That Sum to Target":"number-of-submatrices-that-sum-to-target",
+  "Number of Substrings Containing All Three Characters":"number-of-substrings-containing-all-three-characters",
+  "Ones and Zeroes":"ones-and-zeroes",
+  "Open the Lock":"open-the-lock",
+  "Pacific Atlantic Water Flow":"pacific-atlantic-water-flow",
+  "Palindrome Partitioning":"palindrome-partitioning",
+  "Palindromic Substrings":"palindromic-substrings",
+  "Partition Array for Maximum Sum":"partition-array-for-maximum-sum",
+  "Partition Equal Subset Sum":"partition-equal-subset-sum",
+  "Partition Labels":"partition-labels",
+  "Partition List":"partition-list",
+  "Partition to K Equal Sum Subsets":"partition-to-k-equal-sum-subsets",
+  "Pascal’s Triangle":"pascals-triangle",
+  "Path Sum":"path-sum",
+  "Path with Maximum Gold":"path-with-maximum-gold",
+  "Path With Minimum Effort":"path-with-minimum-effort",
+  "Perfect Squares":"perfect-squares",
+  "Permutation in String":"permutation-string",
+  "Permutations":"permutations",
+  "Permutations II":"permutations-ii",
+  "Plus One":"plus-one",
+  "Populating Next Right Pointers in Each Node":"populating-next-right-pointers-in-each-node",
+  "Pow(x, n)":"pow-x-n",
+  "Power of Two":"power-of-two",
+  "Profitable Schemes":"profitable-schemes",
+  "Range Sum of BST":"range-sum-of-bst",
+  "Range Sum Query - Immutable":"range-sum-query-immutable",
+  "Range Sum Query 2D - Immutable":"range-sum-query-2d-immutable",
+  "Ransom Note":"ransom-note",
+  "Recover Binary Search Tree":"recover-binary-search-tree",
+  "Redundant Connection":"redundant-connection",
+  "Regions Cut by Slashes":"regions-cut-by-slashes",
+  "Regular Expression Matching":"regular-expression-matching",
+  "Relative Sort Array":"relative-sort-array",
+  "Remove All Adjacent Duplicates in String II":"remove-all-adjacent-duplicates-in-string-ii",
+  "Remove Covered Intervals":"remove-covered-intervals",
+  "Remove Duplicates from Sorted Array":"remove-duplicates-from-sorted-array",
+  "Remove Element":"remove-element",
+  "Remove K Digits":"remove-k-digits",
+  "Remove Nth Node From End of List":"remove-node-from-end-of-linked-list",
+  "Reorder Routes to Make All Paths Lead to the City Zero":"reorder-routes-to-make-all-paths-lead-to-the-city-zero",
+  "Reorganize String":"reorganize-string",
+  "Restore IP Addresses":"restore-ip-addresses",
+  "Reverse Bits":"reverse-bits",
+  "Reverse Linked List":"reverse-a-linked-list",
+  "Reverse Nodes in k-Group":"reverse-nodes-in-k-group",
+  "Roman to Integer":"roman-to-integer",
+  "Rotate Array":"rotate-array",
+  "Rotate List":"rotate-list",
+  "Russian Doll Envelopes":"russian-doll-envelopes",
+  "Search a 2D Matrix":"search-2d-matrix",
+  "Search in Rotated Sorted Array":"find-target-in-rotated-sorted-array",
+  "Search in Rotated Sorted Array II":"search-in-rotated-sorted-array-ii",
+  "Search Insert Position":"search-insert-position",
+  "Search Suggestions System":"search-suggestions-system",
+  "Serialize and Deserialize Binary Tree":"serialize-and-deserialize-binary-tree",
+  "Set Matrix Zeroes":"set-zeroes-in-matrix",
+  "Shortest Bridge":"shortest-bridge",
+  "Shortest Palindrome":"shortest-palindrome",
+  "Shortest Path in Binary Matrix":"shortest-path-in-binary-matrix",
+  "Shortest Path with Alternating Colors":"shortest-path-with-alternating-colors",
+  "Shortest Subarray with Sum at Least K":"shortest-subarray-with-sum-at-least-k",
+  "Simplify Path":"simplify-path",
+  "Single Element in a Sorted Array":"single-element-in-a-sorted-array",
+  "Single Number":"single-number",
+  "Single Number III":"single-number-iii",
+  "Single-Threaded CPU":"single-threaded-cpu",
+  "Sliding Window Maximum":"sliding-window-maximum",
+  "Snakes and Ladders":"snakes-and-ladders",
+  "Solving Questions With Brainpower":"solving-questions-with-brainpower",
+  "Sort Characters By Frequency":"sort-characters-by-frequency",
+  "Sort Colors":"sort-colors",
+  "Sort List":"sort-list",
+  "Spiral Matrix":"spiral-matrix",
+  "Spiral Matrix II":"spiral-matrix-ii",
+  "Split a String Into the Max Number of Unique Substrings":"split-a-string-into-the-max-number-of-unique-substrings",
+  "Split Array Largest Sum":"split-array-largest-sum",
+  "Sqrt(x)":"sqrtx",
+  "Squares of a Sorted Array":"squares-of-a-sorted-array",
+  "Stone Game III":"stone-game-iii",
+  "String Compression":"string-compression",
+  "Subarray Sum Equals K":"subarray-sum-equals-k",
+  "Subsets":"subsets",
+  "Subsets II":"subsets-ii",
+  "Subtree of Another Tree":"subtree-of-a-binary-tree",
+  "Sum of Subarray Minimums":"sum-of-subarray-minimums",
+  "Sum of Two Integers":"sum-of-two-integers",
+  "Sum Root to Leaf Numbers":"sum-root-to-leaf-numbers",
+  "Surrounded Regions":"surrounded-regions",
+  "Swap Nodes in Pairs":"swap-nodes-in-pairs",
+  "Target Sum":"target-sum",
+  "Text Justification":"text-justification",
+  "Time Based Key-Value Store":"time-based-key-value-store",
+  "Time Needed to Inform All Employees":"time-needed-to-inform-all-employees",
+  "Top K Frequent Elements":"top-k-elements-in-list",
+  "Trapping Rain Water":"trapping-rain-water",
+  "Triangle":"triangle",
+  "Two City Scheduling":"two-city-scheduling",
+  "Two Sum":"two-integer-sum",
+  "Ugly Number II":"ugly-number-ii",
+  "Uncrossed Lines":"uncrossed-lines",
+  "Unique Paths II":"unique-paths-ii",
+  "Valid Palindrome II":"valid-palindrome-ii",
+  "Valid Sudoku":"valid-sudoku",
+  "Word Break":"word-break",
+  "Word Ladder":"word-ladder",
+  "Word Search":"search-for-word",
+  "Word Search II":"search-for-word-ii"
+};
+
+const slug=t=>SLUG_OV[t]||t.toLowerCase().replace(/[\u2019']/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
 const DIFFS=["Easy","Medium","Hard"],DCLS=["dE","dM","dH"];
 
-/* ---------- build the 500 ---------- */
+/* ---------- build the curriculum ---------- */
 const Q=[],TOPICS=[],BYLC={};
 SECTIONS.forEach(sec=>{
   TOPICS.push({name:sec.name,key:sec.key,phase:sec.phase,brief:sec.brief,start:Q.length,count:sec.rows.length});
   sec.rows.forEach((r,i)=>{
     const q={i:Q.length,num:String(Q.length+1).padStart(3,"0"),title:r[0],lc:r[1],d:r[2],pat:r[3],co:r[4]||"",skill:r[5],nc:r[6]||0,cx:r[7]||"",topic:sec.name,phase:sec.phase,topicKey:sec.key,cp:i===sec.rows.length-1&&sec.rows.length>=6};
-    Q.push(q);BYLC[r[1]]=q;
+    Q.push(q);
+    if(BYLC[r[1]])console.warn("Duplicate LeetCode id "+r[1]+" — the later row overrides the earlier one in BYLC");
+    BYLC[r[1]]=q;
   });
 });
-if(Q.length!==500)console.warn("Question count is "+Q.length+" — expected 500");
+const missingF50=FINAL50.filter(l=>!BYLC[l]),missingB30=BLIND30.filter(l=>!BYLC[l]);
+if(missingF50.length)console.warn("FINAL50 ids missing from the curriculum:",missingF50.join(", "));
+if(missingB30.length)console.warn("BLIND30 ids missing from the curriculum:",missingB30.join(", "));
 const inF50=FINAL50.map(l=>BYLC[l]).filter(Boolean), inB30=BLIND30.map(l=>BYLC[l]).filter(Boolean);
 const F50SET=new Set(inF50.map(q=>q.i)),B30SET=new Set(inB30.map(q=>q.i));
 
@@ -1351,17 +1715,20 @@ const cx=q=>q.cx||pat(q).cx;
 const tgtTime=q=>q.d===0?"15–25 min":q.d===1?"25–40 min":"40–60 min";
 function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;$("#toasts").appendChild(t);setTimeout(()=>{t.style.opacity="0";t.style.transition="opacity .3s";setTimeout(()=>t.remove(),320);},2400);}
 function fmtSec(s){s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return(h?h+":":"")+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0");}
-function loggedSec(id){const g=get(id);let t=g.sec+g.min*60;if(TIMERS[id])t+=(Date.now()-TIMERS[id].t0)/1000;return t;}
+function loggedSec(id){const g=get(id);let t=+g.sec||0;if(TIMERS[id])t+=(Date.now()-TIMERS[id].t0)/1000;return t;}
 function logAttempt(id){const g=get(id);set(id,{att:g.att+1,last:Date.now()});}
 
 /* ---------- timers ---------- */
 const TIMERS={};
 setInterval(()=>{document.querySelectorAll("[data-td]").forEach(el=>{el.textContent=fmtSec(loggedSec(+el.dataset.td));});},500);
 function pauseTimer(id){if(!TIMERS[id])return;const el=(Date.now()-TIMERS[id].t0)/1000;delete TIMERS[id];const g=get(id);set(id,{sec:Math.round(g.sec+el)});}
-function resetTimer(id){if(TIMERS[id]){delete TIMERS[id];}else{set(id,{sec:0});}updateCardTimerBtns(id);}
+function resetTimer(id){if(TIMERS[id])delete TIMERS[id];set(id,{sec:0});updateCardTimerBtns(id);}
 function startTimer(id){if(TIMERS[id])return;TIMERS[id]={t0:Date.now()};logAttempt(id);updateCardTimerBtns(id);}
 function updateCardTimerBtns(id){const c=document.querySelector('[data-qid="'+id+'"]');if(!c)return;const run=!!TIMERS[id];const b=c.querySelector('[data-act="tpause"]');if(b)b.innerHTML=run?ic("pause")+" Pause":ic("play")+" Start";}
-window.addEventListener("beforeunload",()=>{Object.keys(TIMERS).forEach(pauseTimer);if(Object.keys(P).length)save();clearTimeout(saveT);});
+function persistTimers(){Object.keys(TIMERS).forEach(pauseTimer);if(Object.keys(P).length)save();clearTimeout(saveT);}
+window.addEventListener("beforeunload",persistTimers);
+window.addEventListener("pagehide",persistTimers);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")persistTimers();});
 
 /* ---------- icons (no emoji, ever) ---------- */
 const IC={
@@ -1386,15 +1753,16 @@ let F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",
 let SORT="cur";
 const EXP=new Set();
 let MIX={cur:null,seen:0};
-const PHASEGROUPS={"Phase 0 · Foundation":"Foundation","Phase 1 · Arrays, Strings & Hashing":"Arrays & Hashing","Phase 2 · Core Array Patterns":"Core Patterns","Phase 3 · Sorting, Lists, Stacks & Queues":"Lists · Stacks · Queues","Phase 4 · Recursion, Trees & BST":"Trees & BST","Phase 5 · Heaps & Priority Queues":"Heap","Phase 6 · Backtracking":"Backtracking","Phase 7 · Greedy & Intervals":"Greedy & Intervals","Phase 8–11 · Graph Algorithms":"Graphs","Phase 12 · Dynamic Programming":"DP","Phase 13 · Bit Manipulation":"Bits & Trie","Phase 14 · Tries":"Bits & Trie","Phase 15 · Advanced Patterns":"Advanced","SQL Phase 1 · Fundamentals":"SQL · Basics","SQL Phase 2 · Aggregation":"SQL · Basics","SQL Phase 3 · Joins":"SQL · Joins","SQL Phase 4 · Subqueries":"SQL · Subqueries","SQL Phase 5 · Conditional Logic":"SQL · Conditional","SQL Phase 6 · Functions":"SQL · Functions","SQL Phase 7 · Window Functions":"SQL · Window","SQL Phase 8 · Advanced Analytics":"SQL · Analytics","SQL Phase 9 · CTEs & Recursion":"SQL · Advanced","SQL Phase 10 · Interview SQL":"SQL · Real-World"};
+const PHASEGROUPS={"Phase 0 · Foundation":"Foundation","Phase 1 · Arrays, Strings & Hashing":"Arrays & Hashing","Phase 2 · Core Array Patterns":"Core Patterns","Phase 3 · Sorting, Lists, Stacks & Queues":"Lists · Stacks · Queues","Phase 4 · Recursion, Trees & BST":"Trees & BST","Phase 5 · Heaps & Priority Queues":"Heap","Phase 6 · Backtracking":"Backtracking","Phase 7 · Greedy & Intervals":"Greedy & Intervals","Phase 8–11 · Graph Algorithms":"Graphs","Phase 12 · Dynamic Programming":"DP","Phase 13 · Bit Manipulation":"Bits & Trie","Phase 14 · Tries":"Bits & Trie","Phase 15 · Advanced Patterns":"Advanced","SQL Phase 1 · Fundamentals":"SQL · Basics","SQL Phase 2 · Aggregation":"SQL · Basics","SQL Phase 3 · Joins":"SQL · Joins","SQL Phase 4 · Subqueries":"SQL · Subqueries","SQL Phase 5 · Conditional Logic":"SQL · Conditional","SQL Phase 6 · Functions":"SQL · Functions","SQL Phase 7 · Window Functions":"SQL · Window","SQL Phase 8 · Advanced Analytics":"SQL · Analytics","SQL Phase 9 · CTEs & Recursion":"SQL · Advanced","SQL Phase 10 · Interview SQL":"SQL · Real-World","Phase 16 · Gap Fillers":"Gap Fillers"};
 
 /* ---------- stats ---------- */
 function stats(){
-  const s={done:0,r1:0,r2:0,mast:0,ind:0,hintA:0,revisit:0,attempt:0,week:0};
+  const s={done:0,r1:0,r2:0,mast:0,ind:0,hintA:0,revisit:0,attempt:0,week:0,reviseToday:0};
   const now=Date.now();
   Q.forEach(q=>{const g=get(q.i);
     if(g.s===2||g.m)s.done++;if(g.r1)s.r1++;if(g.r2)s.r2++;if(g.m)s.mast++;
     if(g.sol===1)s.ind++;if(g.sol===2)s.hintA++;if(g.s===3)s.revisit++;if(g.s===1)s.attempt++;
+    if(g.r1&&!g.r2)s.reviseToday++;
     if(g.last&&now-g.last<6048e5&&(g.s===2||g.m))s.week++;});
   return s;
 }
@@ -1405,7 +1773,7 @@ function streak(){
   let n=0;while(days.has(d.toDateString())){n++;d.setDate(d.getDate()-1);}
   return n||null;
 }
-function updateTop(){const s=stats();$("#toplbl").textContent=s.done+" / 500";$("#topbar").style.width=(s.done/5)+"%";}
+function updateTop(){const s=stats();$("#toplbl").textContent=s.done+" / "+Q.length;$("#topbar").style.width=(Q.length?s.done/Q.length*100:0)+"%";if($("#sidefoot"))$("#sidefoot").innerHTML=Q.length+" problems · 0 premium<br>local · offline · yours";}
 
 /* ---------- filtering & sorting ---------- */
 function filtered(){
@@ -1415,9 +1783,9 @@ function filtered(){
   if(F.diff!=="all")arr=arr.filter(q=>DIFFS[q.d]===F.diff);
   if(F.pat!=="all")arr=arr.filter(q=>pat(q).l===F.pat);
   if(F.co!=="all")arr=arr.filter(q=>cos(q.co).includes(F.co));
-  if(F.src!=="all")arr=arr.filter(q=>F.src==="NeetCode"?q.nc:true);
+  if(F.src!=="all")arr=arr.filter(q=>F.src==="NeetCode"?!!NC_SLUG[q.title]:true);
   if(F.st!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.st==="Solved"?(g.s===2||g.m):F.st==="Not Started"?(g.s===0&&!g.m):g.s===["Not Started","Attempted","Solved","Revisit"].indexOf(F.st);});
-  if(F.rev!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.rev==="r1"?g.r1:F.rev==="r1x"?(!g.r1&&!g.m):F.rev==="r2"?g.r2:F.rev==="r2x"?!g.r2:F.rev==="m"?g.m:g.s===3;});
+  if(F.rev!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.rev==="r1"?g.r1:F.rev==="r1x"?(!g.r1&&!g.m):F.rev==="r2"?g.r2:F.rev==="r2x"?!g.r2:F.rev==="m"?g.m:F.rev==="today"?(g.r1&&!g.r2):F.rev==="rv"?g.s===3:true;});
   if(F.hint!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.hint==="none"?!g.h.some(x=>x):g.h[+F.hint-1]===1;});
   const t=F.q.trim().toLowerCase();
   if(t)arr=arr.filter(q=>q.title.toLowerCase().includes(t)||q.lc===t||q.num===t.padStart(3,"0")||pat(q).l.toLowerCase().includes(t)||q.topic.toLowerCase().includes(t)||q.phase.toLowerCase().includes(t)||cos(q.co).some(c=>c.toLowerCase().includes(t)));
@@ -1436,25 +1804,15 @@ function filtered(){
 /* ---------- card rendering ---------- */
 function hiddenPattern(q){const g=get(q.i);return(q.cp||B30SET.has(q.i))&&!g.rv;}
 function sourcesHTML(q){
+  const search=encodeURIComponent(q.title);
   let h='<a class="srclnk" href="https://leetcode.com/problems/'+slug(q.title)+'/" target="_blank" rel="noopener noreferrer">LeetCode '+ic("ext")+'</a>';
-  if(q.nc)h+=' <a class="srclnk" href="https://neetcode.io/problems/'+slug(q.title)+'" target="_blank" rel="noopener noreferrer">NeetCode '+ic("ext")+'</a>';
+  const ncs=NC_SLUG[q.title];
+  if(ncs)h+=' <a class="srclnk" href="https://neetcode.io/problems/'+ncs+'" target="_blank" rel="noopener noreferrer">NeetCode '+ic("ext")+'</a>';
+  h+=' <a class="srclnk" href="https://leetcode.com/problemset/?search='+search+'" target="_blank" rel="noopener noreferrer">Search on LeetCode '+ic("ext")+'</a>';
   return h;
 }
-function cardHTML(q,o){
-  o=o||{};const g=get(q.i),hp=hiddenPattern(q)&&!o.forcePattern,cls=EXP.has(q.i)||o.open?" open":"",st=["","st1","st2","st3"][g.s===2&&!g.m?2:g.s]||"";
-  const coms=cos(q.co);
-  return '<article class="card q '+st+cls+'" data-qid="'+q.i+'">'+
-  '<header class="qh" data-act="tog"><span class="qnum">'+q.num+'</span>'+
-  '<div class="qmain"><div class="qtitle">'+esc(q.title)+'</div><div class="qmeta">'+
-  '<span class="tag '+DCLS[q.d]+'">'+DIFFS[q.d]+'</span>'+
-  (hp?'<span class="tag" style="border-style:dashed">'+(q.cp?"Pattern hidden · checkpoint":"Pattern hidden")+'</span>':'<span class="pchip">'+esc(pat(q).l)+'</span>')+
-  '<span class="tag">'+esc(q.topic)+'</span><span class="tag mono">LC '+q.lc+'</span>'+
-  (q.cp?'<span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">CHECKPOINT</span>':"")+
-  '</div></div>'+
-  '<div class="qco">'+coms.slice(0,3).map(c=>'<span class="cotag">'+c+'</span>').join("")+(coms.length>3?'<span class="cotag">+'+(coms.length-3)+'</span>':"")+'</div>'+
-  '<span class="qchev">'+ic("chev")+'</span></header>'+
-  '<div class="qbody">'+
-    (hp?'<div class="hiddenpat">Solve it first — then identify the pattern yourself.<button class="btn sm" data-act="reveal">'+ic("eye")+' Reveal Pattern</button></div>':'')+
+function cardBodyHTML(q,g,hp,coms){
+  return (hp?'<div class="hiddenpat">Solve it first — then identify the pattern yourself.<button class="btn sm" data-act="reveal">'+ic("eye")+' Reveal Pattern</button></div>':'')+
     '<div class="qgrid"><div>'+
       '<div class="klabel">Companies (historically reported)</div><div class="kval">'+(coms.length?coms.map(c=>'<span class="cotag">'+c+'</span>').join(" "):'<span style="color:var(--faint)">—</span>')+'</div>'+
       '<div class="klabel">Sources</div><div class="kval" style="display:flex;gap:8px;flex-wrap:wrap">'+sourcesHTML(q)+'</div>'+
@@ -1475,7 +1833,7 @@ function cardHTML(q,o){
       ["—","Independent","With Hint","Needed Sol."].map((s,i)=>'<button data-act="sol" data-st="'+i+'" class="'+(g.sol===i?"on":"")+'">'+s+'</button>').join("")+'</div>'+
     '</div>'+
     '<div class="ctrlrow"><span class="klabel" style="margin:0 8px 0 0">Hints</span>'+
-      [0,1,2].map(n=>'<button class="chip '+(g.h[n]?"on":"")+'" data-act="hint" data-h="'+n+'">'+ic("bulb")+' Hint '+(n+1)+'</button>').join("")+
+      [0,1,2].map(n=>'<button class="chip '+(g.h[n]?"on":"")+'" data-act="hint" data-h="'+n+'">'+ic("bulb")+' '+(g.h[n]?"Hint "+(n+1)+" used":"Hint "+(n+1))+'</button>').join("")+
     '</div>'+
     '<div class="hintzone">'+[0,1,2].map(n=>g.h[n]&&!(hp)?'<div class="hintrow"><b>Hint '+(n+1)+' — '+["Pattern recognition","Direction","Final nudge"][n]+':</b> '+esc(pat(q).h[n])+'</div>':"").join("")+'</div>'+
     '<div class="qgrid2">'+
@@ -1489,17 +1847,33 @@ function cardHTML(q,o){
     '<div class="timerbox"><span class="tdisp mono" data-td="'+q.i+'">'+fmtSec(loggedSec(q.i))+'</span>'+
       '<button class="btn sm" data-act="tpause">'+(TIMERS[q.i]?ic("pause")+" Pause":ic("play")+" Start")+'</button>'+
       '<button class="btn sm" data-act="treset">'+ic("rst")+' Reset stopwatch</button>'+
-      '<span style="color:var(--faint);font-size:12px">My time (min):</span><input type="number" min="0" class="tin" style="width:80px;padding:5px 8px" data-field="min" value="'+(g.min||"")+'">'+
+      '<span style="color:var(--faint);font-size:12px">Manual time (min):</span><input type="number" min="0" class="tin" style="width:80px;padding:5px 8px" data-field="min" value="'+(g.min||"")+'">'+
+      '<span class="tag mono">Stopwatch only</span>'+
       '<span class="tag mono">Attempts: '+g.att+'</span><button class="btn sm" data-act="att">+1</button>'+
       (g.last?'<span class="tag mono">Last: '+new Date(g.last).toLocaleDateString()+'</span>':"")+
-    '</div>'+
-  '</div></article>';
+    '</div>';
+}
+function cardHTML(q,o){
+  o=o||{};const g=get(q.i),hp=hiddenPattern(q)&&!o.forcePattern,open=EXP.has(q.i)||o.open,cls=open?" open":"",st=["","st1","st2","st3"][g.s===2&&!g.m?2:g.s]||"";
+  const coms=cos(q.co);
+  return '<article class="card q '+st+cls+'" data-qid="'+q.i+'">'+
+  '<header class="qh" data-act="tog" role="button" tabindex="0" aria-expanded="'+open+'" aria-controls="qb'+q.i+'"><span class="qnum">'+q.num+'</span>'+
+  '<div class="qmain"><div class="qtitle">'+esc(q.title)+'</div><div class="qmeta">'+
+  '<span class="tag '+DCLS[q.d]+'">'+DIFFS[q.d]+'</span>'+
+  (hp?'<span class="tag" style="border-style:dashed">'+(q.cp?"Pattern hidden · checkpoint":"Pattern hidden")+'</span>':'<span class="pchip">'+esc(pat(q).l)+'</span>')+
+  '<span class="tag">'+esc(q.topic)+'</span><span class="tag mono">LC '+q.lc+'</span>'+
+  (q.cp?'<span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">CHECKPOINT</span>':"")+
+  '</div></div>'+
+  '<div class="qco">'+coms.slice(0,3).map(c=>'<span class="cotag">'+c+'</span>').join("")+(coms.length>3?'<span class="cotag">+'+(coms.length-3)+'</span>':"")+'</div>'+
+  '<span class="qchev">'+ic("chev")+'</span></header>'+
+  (open?'<div class="qbody" id="qb'+q.i+'">'+cardBodyHTML(q,g,hp,coms)+'</div>':'')+
+  '</article>';
 }
 
 /* ---------- views ---------- */
 const NAV=[
- ["dash","Dashboard",null],["list","All 500 Problems",null],["_p","PATTERNS",""],
- ["list","Revision 1","r1"],["list","Revision 2","r2"],["list","Mastered","m"],["list","Needs Revisit","rv"],
+ ["dash","Dashboard",null],["list","All Problems",null],["_p","PATTERNS",""],
+ ["pat","Patterns & Topics",null],["list","Revision 1","r1"],["list","Revision 2","r2"],["list","Mastered","m"],["list","Needs Revisit","rv"],
  ["_m","PRACTICE",""],["mixed","Mixed Practice",null],["f50","Final Revision Set · 50",null],["blind","Blind Pattern Test · 30",null],
  ["_a","TRACKING",""],["mist","Mistake Tracker",null],["settings","Settings",null]
 ];
@@ -1509,18 +1883,18 @@ function renderNav(){
     const active=VIEW===n[0]&&(n[2]?F.rev===n[2]:(n[0]==="list"?!["r1","r2","m","rv"].includes(F.rev):true));
     let cnt="";
     if(n[2]==="r1")cnt=stats().r1;if(n[2]==="r2")cnt=stats().r2;if(n[2]==="m")cnt=stats().mast;if(n[2]==="rv")cnt=stats().revisit;
-    if(n[0]==="list"&&!n[2])cnt="500";
+    if(n[0]==="list"&&!n[2])cnt=Q.length;
     return'<button class="nv '+(active?"on":"")+'" data-nav="'+n[0]+'" data-rev="'+(n[2]||"")+'">'+n[1]+(cnt!==""?'<span class="cnt">'+cnt+'</span>':"")+'</button>';
   }).join("");
 }
 const CHEAT=[["Pair / complement with a target","HashMap · Two Pointers"],["Longest/shortest substring or subarray","Sliding Window"],["Many range-sum queries","Prefix Sum"],["Subarrays with a sum property","Prefix Sum + HashMap"],["Sorted (or sortable) search space","Binary Search"],["“Minimum X that is achievable”","Binary Search on Answer"],["Top K / Kth largest","Heap"],["Running median of a stream","Two Heaps"],["Next greater/smaller element","Monotonic Stack"],["Max/min per sliding window","Monotonic Deque"],["All combinations / permutations / subsets","Backtracking"],["Dependencies, prerequisites","Topological Sort"],["Connected components / merging groups","DFS · BFS · Union Find"],["Fewest steps, unweighted","BFS"],["Cheapest path, weighted","Dijkstra"],["Two exclusive states per step","State-Machine DP"],["Best chain under ordering","LIS"],["Aligning two sequences","LCS / Edit Distance"],["Subset under a budget","Knapsack DP"],["Paired elements cancel","XOR"],["Many words, prefix queries","Trie"],["Count active spans at boundaries","Sweep Line"],["Overlapping subproblems, optimal substructure","DP"]];
 function renderDash(){
   const s=stats(),sk=streak();
-  let h='<h2 class="vh">Dashboard</h2><p class="vs">Your entire curriculum at a glance — every tick below is one of the 500 questions.</p>';
-  h+='<div class="card hero"><div><div class="big">'+s.done+'<span> / 500</span></div><div class="pct">'+(s.done/5).toFixed(1)+'% complete · '+s.mast+' mastered</div></div><div class="hright"><div><b>'+s.ind+'</b> solved independently · <b>'+s.hintA+'</b> hint-assisted</div><div><b>'+s.week+'</b> solved this week · streak: <b>'+(sk||"—")+'</b>'+(sk===null?' <span style="font-size:10px">(no attempt dates yet)</span>':"")+'</div><div style="margin-top:6px;font-size:11px;color:var(--faint)">Revision 1: '+s.r1+' · Revision 2: '+s.r2+' · Revisit queue: '+s.revisit+'</div></div></div>';
-  h+='<div class="card"><div class="strip">'+Q.map(q=>{const g=get(q.i);const c=g.s===2||g.m?"st2":g.s===1?"st1":g.s===3?"st3":"";const r=(g.r1||g.r2||g.m)?" rv":"";return'<i class="'+c+r+'" data-tick="'+q.i+'" title="#'+q.num+' · '+esc(q.title)+'"></i>';}).join("")+'</div><div class="striplegend"><span><b style="background:var(--sur2)"></b>Not started</span><span><b style="background:var(--teal)"></b>Attempted</span><span><b style="background:var(--grn)"></b>Solved</span><span><b style="background:var(--red)"></b>Revisit</span><span><b style="background:var(--sur2);box-shadow:0 0 0 1px var(--acc)"></b>Revision underway</span></div></div>';
+  let h='<h2 class="vh">Dashboard</h2><p class="vs">Your entire curriculum at a glance — every tick below is one of the '+Q.length+' questions.</p>';
+  h+='<div class="card hero"><div><div class="big">'+s.done+'<span> / '+Q.length+'</span></div><div class="pct">'+(s.done/Q.length*100).toFixed(1)+'% complete · '+s.mast+' mastered <button class="btn sm" data-act="nextunsolved" style="margin-left:10px">Next unsolved</button></div></div><div class="hright"><div><b>'+s.ind+'</b> solved independently · <b>'+s.hintA+'</b> hint-assisted</div><div><b>'+s.week+'</b> solved this week · streak: <b>'+(sk||"—")+'</b>'+(sk===null?' <span style="font-size:10px">(no attempt dates yet)</span>':"")+'</div><div style="margin-top:6px;font-size:11px;color:var(--faint)">Revision 1: '+s.r1+' · Revision 2: '+s.r2+' · Revise today: '+s.reviseToday+' · Revisit queue: '+s.revisit+'</div></div></div>';
+  h+='<div class="card"><div class="strip" style="--stripcols:'+Q.length+'">'+Q.map(q=>{const g=get(q.i);const c=g.s===2||g.m?"st2":g.s===1?"st1":g.s===3?"st3":"";const r=(g.r1||g.r2||g.m)?" rv":"";return'<i class="'+c+r+'" data-tick="'+q.i+'" title="#'+q.num+' · '+esc(q.title)+'"></i>';}).join("")+'</div><div class="striplegend"><span><b style="background:var(--sur2)"></b>Not started</span><span><b style="background:var(--teal)"></b>Attempted</span><span><b style="background:var(--grn)"></b>Solved</span><span><b style="background:var(--red)"></b>Revisit</span><span><b style="background:var(--sur2);box-shadow:0 0 0 1px var(--acc)"></b>Revision underway</span></div></div>';
   h+='<div class="statgrid">'+
-   [["Completed",s.done,"g"],["Revision 1",s.r1,""],["Revision 2",s.r2,""],["Mastered",s.mast,"g"],["Independent solves",s.ind,"a"],["Hint-assisted",s.hintA,"t"],["Needs revisit",s.revisit,"r"],["Attempted (open)",s.attempt,"t"],["Solved this week",s.week,""],["Practice streak",(sk===null?"—":sk+"d"),""]].map(x=>'<div class="card stat '+x[2]+'"><div class="n">'+x[1]+'<small> / 500</small></div><div class="l">'+x[0]+'</div></div>').join("")+'</div>';
+   [["Completed",s.done,"g",1],["Revision 1",s.r1,"",1],["Revision 2",s.r2,"",1],["Mastered",s.mast,"g",1],["Independent solves",s.ind,"a",1],["Hint-assisted",s.hintA,"t",1],["Needs revisit",s.revisit,"r",1],["Attempted (open)",s.attempt,"t",1],["Revise today",s.reviseToday,"",1],["Solved this week",s.week,"",0],["Practice streak",(sk===null?"—":sk+"d"),"",0]].map(x=>'<div class="card stat '+x[2]+'"><div class="n">'+x[1]+(x[3]?'<small> / '+Q.length+'</small>':"")+'</div><div class="l">'+x[0]+'</div></div>').join("")+'</div>';
   h+='<div class="card"><div style="padding:14px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:baseline;gap:12px"><b>Topic progress</b><span style="font-size:11px;color:var(--faint)">click a topic to open it</span></div>'+
   TOPICS.map(t=>{const c=Q.slice(t.start,t.start+t.count).filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;return'<div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+'</small></div><div class="bar g"><i style="width:'+(c/t.count*100)+'%"></i></div><div class="tv mono">'+c+' / '+t.count+'</div></div>';}).join("")+'</div>';
   h+='<details class="cheat card"><summary>Pattern recognition cheat sheet</summary><table class="cheattbl"><tr><th>Problem signal</th><th>Consider</th></tr>'+CHEAT.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")+'</table></details>';
@@ -1536,18 +1910,18 @@ function filterBar(){
   sel("diff","Difficulty",["Easy","Medium","Hard"],F.diff)+
   sel("pat","Pattern",pats,F.pat)+
   sel("co","Company",coset,F.co)+
-  sel("src","Source",["LeetCode"],F.src)+
+  sel("src","Source",["LeetCode","NeetCode"],F.src)+
   sel("st","Status",["Not Started","Attempted","Solved","Revisit"],F.st)+
-  sel("rev","Revision",["r1x","r1","r2x","r2","m"],F.rev).replace(/<option( selected)?>(r1x|r1|r2x|r2|m)<\/option>/g,(m,sel,v)=>{const names={r1x:"Rev 1 incomplete",r1:"Rev 1 complete",r2x:"Rev 2 incomplete",r2:"Rev 2 complete",m:"Mastered"};return'<option value="'+v+'"'+(sel||"")+'>'+names[v]+'</option>';})+
-  sel("hint","Hint",["1","2","3"],F.hint).replace(/<option>(1|2|3)/g,'<option value="$1">')+  
+  sel("rev","Revision",["r1x","r1","r2x","r2","m","today","rv"],F.rev).replace(/<option( selected)?>(r1x|r1|r2x|r2|m|today|rv)<\/option>/g,(m,sel,v)=>{const names={r1x:"Rev 1 incomplete",r1:"Rev 1 complete",r2x:"Rev 2 incomplete",r2:"Rev 2 complete",m:"Mastered",today:"Revise today",rv:"Needs Revisit"};return'<option value="'+v+'"'+(sel||"")+'>'+names[v]+'</option>';})+
+  '<label>Hint<select data-f="hint"><option value="all">All</option>'+[["none","No hints used"],["1","Hint 1 used"],["2","Hint 2 used"],["3","Hint 3 used"]].map(o=>'<option value="'+o[0]+'"'+(F.hint===o[0]?" selected":"")+'>'+o[1]+'</option>').join("")+'</select></label>'+
   '<label>Sort<select data-f="sort"><option value="cur">Curriculum order</option><option value="diff"'+(SORT==="diff"?" selected":"")+'>Difficulty</option><option value="pat"'+(SORT==="pat"?" selected":"")+'>Pattern</option><option value="topic"'+(SORT==="topic"?" selected":"")+'>Topic</option><option value="co"'+(SORT==="co"?" selected":"")+'>Company</option><option value="done"'+(SORT==="done"?" selected":"")+'>Completion</option><option value="rev"'+(SORT==="rev"?" selected":"")+'>Revision status</option></select></label>'+
   '<button class="btn sm freset" data-act="clearf">Reset filters</button></div>';
 }
 function renderList(){
-  const titles={r1:"Revision 1",r2:"Revision 2",m:"Mastered",rv:"Needs Revisit"};
+  const titles={r1:"Revision 1",r2:"Revision 2",m:"Mastered",rv:"Needs Revisit",today:"Revise today"};
   let h="";
-  if(F.rev&&titles[F.rev]){h+='<h2 class="vh">'+titles[F.rev]+'</h2><p class="vs">'+({r1:"First pass after your initial solve — tick Revision 1 on each card.",r2:"Second pass — tick Revision 2 once it feels routine.",m:"You can solve it cold and explain the pattern aloud.",rv:"Everything you flagged for another look."})[F.rev]+'</p>';}
-  else h+='<h2 class="vh">All 500 Problems</h2><p class="vs">Curriculum order. Click any row to open tracking, hints, notes and the timer.</p>';
+  if(F.rev&&titles[F.rev]){h+='<h2 class="vh">'+titles[F.rev]+'</h2><p class="vs">'+({r1:"First pass after your initial solve — tick Revision 1 on each card.",r2:"Second pass — tick Revision 2 once it feels routine.",m:"You can solve it cold and explain the pattern aloud.",rv:"Everything you flagged for another look.",today:"Problems with Revision 1 done but Revision 2 still pending."})[F.rev]+'</p>';}
+  else h+='<h2 class="vh">All Problems</h2><p class="vs">Curriculum order. Click any row to open tracking, hints, notes and the timer.</p>';
   h+=filterBar();
   if(F.topic!=="all"){const t=TOPICS.find(t=>t.key===F.topic);if(t)h+='<div class="card brief">'+esc(t.brief)+'</div>';}
   const arr=filtered();
@@ -1556,7 +1930,8 @@ function renderList(){
   return h+arr.map(q=>cardHTML(q)).join("");
 }
 function renderPatterns(){
-  let h='<h2 class="vh">Patterns & Topics</h2><p class="vs">Forty sections across twenty-five phases. Each one is a repeatable way of thinking, not a topic to memorize.</p>';
+  const phaseCount=new Set(TOPICS.map(t=>t.phase)).size;
+  let h='<h2 class="vh">Patterns & Topics</h2><p class="vs">'+TOPICS.length+' sections across '+phaseCount+' phases. Each one is a repeatable way of thinking, not a topic to memorize.</p>';
   h+=TOPICS.map(t=>{const qs=Q.slice(t.start,t.start+t.count);const c=qs.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;
     return'<div class="card" style="margin-bottom:10px"><div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+' · '+qs.length+' problems</small></div><div class="bar g"><i style="width:'+(c/t.count*100)+'%"></i></div><div class="tv mono">'+c+' / '+t.count+'</div></div></div>';}).join("");
   return h;
@@ -1564,7 +1939,7 @@ function renderPatterns(){
 function renderMixed(){
   let h='<h2 class="vh">Mixed Practice</h2><p class="vs">Random problems from topics you have already started — pattern hidden until you reveal it. Nothing here disturbs your saved progress.</p>';
   if(MIX.cur===null){
-    h+='<div class="card" style="padding:26px"><div style="font-size:15px;margin-bottom:6px"><b>How the pool is built</b></div><p style="color:var(--mut);font-size:13.5px;margin-bottom:18px">Every topic where you have solved at least one problem counts as “started”. If no topic qualifies yet, the whole 500 is used. Choose a difficulty, then draw.</p><div class="ctrlrow">'+
+    h+='<div class="card" style="padding:26px"><div style="font-size:15px;margin-bottom:6px"><b>How the pool is built</b></div><p style="color:var(--mut);font-size:13.5px;margin-bottom:18px">Every topic where you have solved at least one problem counts as “started”. If no topic qualifies yet, the whole curriculum is used. Choose a difficulty, then draw.</p><div class="ctrlrow">'+
     ["All","Easy","Medium","Hard"].map((d,i)=>'<button class="chip '+(MIXDF===i?"on":"")+'" data-act="mixdf" data-st="'+i+'">'+d+'</button>').join("")+
     '<button class="btn pri" data-act="mixnew">'+ic("dice")+' Draw a problem</button></div></div>';
     return h;
@@ -1621,19 +1996,26 @@ function renderSettings(){
   return'<h2 class="vh">Settings</h2><p class="vs">Theme, backups, and a hard reset. Your progress lives only in this browser — export regularly.</p>'+
   '<div class="card">'+
   '<div class="setrow"><div class="st"><b>Theme</b><p>Dark by default; light for bright rooms.</p></div><button class="btn" data-act="theme">Toggle theme</button></div>'+
-  '<div class="setrow"><div class="st"><b>Export progress</b><p>Downloads a JSON snapshot — e.g. dsa400-progress-'+new Date().toISOString().slice(0,10)+'.json</p></div><button class="btn" data-act="export">'+ic("dl")+' Export</button></div>'+
+  '<div class="setrow"><div class="st"><b>Export progress</b><p>Downloads a JSON snapshot — e.g. dsa500-progress-'+new Date().toISOString().slice(0,10)+'.json</p></div><button class="btn" data-act="export">'+ic("dl")+' Export</button></div>'+
   '<div class="setrow"><div class="st"><b>Import progress</b><p>Restore a previous snapshot. Replaces current progress.</p></div><button class="btn" data-act="import">'+ic("up")+' Import</button></div>'+
   '<div class="setrow"><div class="st"><b>Reset all progress</b><p>Wipes every status, revision, note and timer. Cannot be undone.</p></div><button class="btn dng" data-act="reset">Reset everything</button></div>'+
   '<div class="setrow"><div class="st"><b>Storage</b><p>Progress currently occupies '+(bytes/1024).toFixed(1)+' KB of localStorage.</p></div><span class="tag mono">'+Q.length+' questions · 0 premium</span></div>'+
-  '<div class="setrow"><div class="st"><b>About the data</b><p>All 500 are free, unique, pattern-classified LeetCode problems with historically reported company tags and no solutions anywhere. Source buttons appear only where a page verifiably exists: LeetCode for all, NeetCode for those in its curated sets.</p></div></div>'+
+  '<div class="setrow"><div class="st"><b>About the data</b><p>All '+Q.length+' rows are free, unique, pattern-classified LeetCode problems with historically reported company tags and no solutions anywhere. Source buttons appear only where a page verifiably exists: LeetCode for all, NeetCode for those in its curated sets, plus a LeetCode search fallback.</p></div></div>'+
   '</div>';
 }
+function syncHash(){
+  const h=VIEW==="list"&&F.rev!=="all"?"#rev-"+F.rev:"#"+VIEW;
+  if(location.hash!==h)history.replaceState(null,"",h);
+}
 function render(){
+  const y=window.scrollY;
   renderNav();
   const v={dash:renderDash,list:renderList,pat:renderPatterns,mixed:renderMixed,f50:renderF50,blind:renderBlind,mist:renderMist,settings:renderSettings}[VIEW]||renderDash;
   $("#view").innerHTML=v();
   updateTop();
   $("#side").classList.remove("open");
+  window.scrollTo(0,y);
+  syncHash();
 }
 
 /* ---------- events ---------- */
@@ -1644,6 +2026,12 @@ function render(){
   else{if(VIEW==="list"&&v==="list")F.rev="all";VIEW=v;if(v!=="list")F.rev="all";}
   render();window.scrollTo(0,0);
 });
+ $("#view").addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target.closest(".qh[data-act='tog']")){e.preventDefault();e.target.closest(".qh").click();}
+ });
+ document.addEventListener("keydown",e=>{
+  if(e.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$("#search").focus();}
+ });
  $("#view").addEventListener("click",e=>{
   const tick=e.target.closest("[data-tick]");
   if(tick){const id=+tick.dataset.tick;F={topic:Q[id].topicKey,phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};VIEW="list";EXP.add(id);render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+id+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
@@ -1661,6 +2049,7 @@ function render(){
   if(a==="export"){doExport();return;}
   if(a==="import"){$("#importfile").click();return;}
   if(a==="reset"){askReset();return;}
+  if(a==="nextunsolved"){const q=Q.find(q=>{const g=get(q.i);return !(g.s===2||g.m)});if(!q){toast("Every problem is solved — nice work");return;}VIEW="list";F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};EXP.add(q.i);render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+q.i+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
   if(id===null)return;
   const g=get(id);
   if(a==="tog"){EXP.has(id)?EXP.delete(id):EXP.add(id);render();return;}
@@ -1700,22 +2089,24 @@ function render(){
   const id=+card.dataset.qid,f=el.dataset.field;
   if(f==="mis"){set(id,{mis:+el.value});updateTop();}
 });
+let searchT=null;
  $("#search").addEventListener("input",e=>{
   F.q=e.target.value;
   if(VIEW!=="list"){VIEW="list";F.rev="all";}
-  const y=window.scrollY;render();
-});
+  clearTimeout(searchT);searchT=setTimeout(render,150);
+ });
  $("#burger").addEventListener("click",()=>$("#side").classList.toggle("open"));
  $("#themebtn").addEventListener("click",toggleTheme);
 function toggleTheme(){
   const cur=document.documentElement.dataset.theme==="dark"?"light":"dark";
   document.documentElement.dataset.theme=cur;
   try{localStorage.setItem("dsa400_theme",cur);}catch(e){}
+  const mt=document.getElementById("metatheme");if(mt)mt.content=cur==="dark"?"#131110":"#f2ede2";
   $("#themebtn").innerHTML=cur==="dark"?ic("sun"):ic("moon");
 }
 function doExport(){
-  const blob=new Blob([JSON.stringify({app:"dsa400",version:1,exportedAt:new Date().toISOString(),progress:P},null,2)],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="dsa400-progress-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();
+  const blob=new Blob([JSON.stringify({app:"dsa500",version:1,exportedAt:new Date().toISOString(),progress:P},null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="dsa500-progress-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),600);toast("Progress exported");
 }
  $("#importfile").addEventListener("change",e=>{
@@ -1729,13 +2120,13 @@ function doExport(){
       const clean={};
       Object.keys(pr).forEach(k=>{const n=+k;if(!Q[n])return;const x=pr[k]||{};clean[n]={s:x.s|0,r1:x.r1?1:0,r2:x.r2?1:0,m:x.m?1:0,h:[x.h&&x.h[0]?1:0,x.h&&x.h[1]?1:0,x.h&&x.h[2]?1:0],sol:x.sol|0,notes:String(x.notes||""),mis:x.mis|0,learn:String(x.learn||""),rem:String(x.rem||""),att:x.att|0,last:+x.last||0,sec:+x.sec||0,min:+x.min||0,rv:x.rv?1:0,pid:x.pid?1:0};});
       P=clean;save();render();toast("Progress imported — "+Object.keys(clean).length+" problems restored");
-    }catch(err){toast("Import failed — not a valid dsa400 export file");}
+    }catch(err){toast("Import failed — not a valid dsa400 or dsa500 export file");}
     e.target.value="";
   };
   fr.readAsText(file);
 });
 function askReset(){
-  $("#mbox").innerHTML='<h3>Reset all progress?</h3><p>This wipes every status, revision, hint log, note, mistake and timer for all 500 problems. There is no undo — export first if in doubt.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="mconfirm">Yes, reset everything</button></div>';
+  $("#mbox").innerHTML='<h3>Reset all progress?</h3><p>This wipes every status, revision, hint log, note, mistake and timer for all '+Q.length+' problems. There is no undo — export first if in doubt.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="mconfirm">Yes, reset everything</button></div>';
   $("#modal").classList.add("open");
 }
  $("#modal").addEventListener("click",e=>{
@@ -1747,10 +2138,20 @@ function askReset(){
 });
 
 /* ---------- init ---------- */
+function applyHash(){
+  const h=decodeURIComponent(location.hash.slice(1));
+  if(!h)return false;
+  if(h.startsWith("rev-")&&["r1","r2","m","rv","today"].includes(h.slice(4))){VIEW="list";F.rev=h.slice(4);return true;}
+  if(["dash","list","pat","mixed","f50","blind","mist","settings"].includes(h)){VIEW=h;F.rev="all";return true;}
+  return false;
+}
+window.addEventListener("hashchange",()=>{if(applyHash()){render();window.scrollTo(0,0);}});
+applyHash();
 try{const t=localStorage.getItem("dsa400_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
  $("#themebtn").innerHTML=document.documentElement.dataset.theme==="light"?ic("moon"):ic("sun");
+ const mt=document.getElementById("metatheme");if(mt)mt.content=document.documentElement.dataset.theme==="light"?"#f2ede2":"#131110";
 render();
-console.log("DSA·400 ready — "+Q.length+" questions, "+TOPICS.length+" topics, checkpoints: "+Q.filter(q=>q.cp).length);
+console.log("DSA·500 ready — "+Q.length+" questions, "+TOPICS.length+" sections, checkpoints: "+Q.filter(q=>q.cp).length);
 </script>
 </body>
 </html>
