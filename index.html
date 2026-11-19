@@ -73,6 +73,10 @@ a{color:inherit}
   #side{transform:translateX(-100%)} #side.open{transform:none;box-shadow:var(--sh)}
   #main{margin-left:0} #burger{display:grid}
 }
+@media(max-width:600px){
+  #top .mini .bar,#top .mini .lbl{display:none}
+  .searchwrap input{min-width:0}
+}
 
 /* ---------- shared ---------- */
 .card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}
@@ -111,7 +115,7 @@ details.cheat[open] summary::before{content:"−"}
 .hero .pct{font-family:'JetBrains Mono',monospace;color:var(--acc);font-size:14px;margin-top:8px}
 .hero .hright{margin-left:auto;text-align:right;color:var(--mut);font-size:12.5px;line-height:1.8}
 .hero .hright b{color:var(--tx)}
-.strip{display:grid;grid-template-columns:repeat(var(--stripcols),1fr);gap:2px;padding:16px 18px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(8px,1fr));gap:3px;padding:16px 18px}
 .strip i{height:9px;border-radius:2px;background:var(--sur2);cursor:pointer;transition:transform .1s}
 .strip i:hover{transform:scale(1.5)}
 .strip i.st1{background:var(--teal)} .strip i.st2{background:var(--grn)} .strip i.st3{background:var(--red)}
@@ -174,6 +178,7 @@ details.cheat[open] summary::before{content:"−"}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;font-size:12px;font-family:'JetBrains Mono',monospace;border:1px solid var(--bd2);border-radius:8px;color:var(--mut)}
 .chip:hover{border-color:var(--acc);color:var(--acc)}
 .chip.on{border-color:var(--grn);color:var(--grn);background:var(--grn-dim)}
+.chip:disabled,.btn:disabled{opacity:.45;cursor:not-allowed}
 .hintzone{margin:6px 0 14px}
 .hintrow{padding:9px 13px;border-left:2px solid var(--acc-dim);margin:6px 0;background:var(--sur2);border-radius:0 7px 7px 0;font-size:13px;color:var(--mut)}
 .qgrid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -205,6 +210,23 @@ input.tin:focus,select.tin:focus{border-color:var(--acc)}
 .setrow .st b{font-size:14px}
 .setrow .st p{font-size:12.5px;color:var(--mut);margin-top:2px}
 
+/* ---------- library / add ---------- */
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.formgrid{grid-template-columns:1fr}}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld>span{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.err{color:var(--red);font-size:12px;min-height:15px}
+.cochip{padding:5px 9px;font-size:11px;font-family:'JetBrains Mono',monospace;border:1px solid var(--bd2);border-radius:7px;color:var(--mut);background:var(--sur2)}
+.cochip.on{border-color:var(--grn);color:var(--grn);background:var(--grn-dim)}
+.pgcard{padding:15px 17px}
+.pgcard .pgt{font-weight:600;font-size:14.5px}
+.pgcard .pgm{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:3px}
+.pgcard .pgrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:11px}
+.bulkTbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.bulkTbl th,.bulkTbl td{text-align:left;padding:7px 9px;border-top:1px solid var(--bd);vertical-align:top}
+.bulkTbl th{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.ok{color:var(--grn)} .bad{color:var(--red)}
+
 /* ---------- toast & modal ---------- */
 #toasts{position:fixed;bottom:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:8px}
 .toast{background:var(--sur);border:1px solid var(--acc);color:var(--tx);padding:11px 17px;border-radius:9px;font-size:13px;box-shadow:var(--sh);animation:tin .25s}
@@ -223,7 +245,7 @@ input.tin:focus,select.tin:focus{border-color:var(--acc)}
 <body>
 
 <aside id="side">
-  <div class="brand"><img src="./ks-logo.png" alt="DSA 500 brand logo" style="display:block;max-width:100%;height:auto;margin-bottom:10px"><h1>DSA·500</h1><div class="sub">Logic Building OS</div></div>
+  <div class="brand"><img src="./ks-logo.png" width="236" height="236" alt="DSA 500 brand logo" style="display:block;max-width:100%;height:auto;margin-bottom:10px"><h1>DSA·500</h1><div class="sub">Logic Building OS</div></div>
   <nav id="nav"></nav>
   <div class="foot" id="sidefoot"></div>
 </aside>
@@ -625,7 +647,7 @@ null_handling:PT("NULL Handling","Three-Valued Logic","SQL · Selection","Full s
   "Ask which column can legitimately be missing, and decide its default meaning.",
   "COALESCE, IS NULL, or NOT IN (with its NULL trap) mediate every 'missing' question.",
   "A LEFT JOIN that leaves NULLs exposes rows the INNER JOIN silently drops."),
-distinct:PT("Deduplication","DISTINCT · Distinct Counts","SQL · Grouping","Grouping scan","The same logical entity can appear many times.",
+distinct:PT("DISTINCT & Distinct Counts","DISTINCT · Distinct Counts","SQL · Grouping","Grouping scan","The same logical entity can appear many times.",
   "Decide what makes one record different from another before you count.",
   "DISTINCT on the selected keys — or COUNT(DISTINCT key) inside a GROUP BY.",
   "Watch for double-counting when a join fans out rows; dedupe the fan-out first."),
@@ -717,7 +739,7 @@ recursive_cte:PT("Recursive CTE","Walk a Hierarchy","SQL · CTEs","Recursive tab
   "One anchor set seeds the walk; the recursive limb extends it level by level.",
   "UNION ALL the anchor with the recursive SELECT that re-enters the CTE by key.",
   "Dedupe the walk when a node can be reached by more than one path."),
-dedupe:PT("Deduplication","Repeated Identities","SQL · Grouping","Distinct-sort scan","The blight of reporting — the same fact appears twice.",
+dedupe:PT("Duplicate Rows","Repeated Identities","SQL · Grouping","Distinct-sort scan","The blight of reporting — the same fact appears twice.",
   "Find the key that should be unique; every keeper is one of the key's values.",
   "GROUP BY the key and pick a survivor with MIN/MAX, or a row number per key.",
   "A delete that keeps exactly one survivor still needs the same 'first per key' logic."),
@@ -1693,18 +1715,39 @@ if(missingF50.length)console.warn("FINAL50 ids missing from the curriculum:",mis
 if(missingB30.length)console.warn("BLIND30 ids missing from the curriculum:",missingB30.join(", "));
 const inF50=FINAL50.map(l=>BYLC[l]).filter(Boolean), inB30=BLIND30.map(l=>BYLC[l]).filter(Boolean);
 const F50SET=new Set(inF50.map(q=>q.i)),B30SET=new Set(inB30.map(q=>q.i));
+const QI=new Map();
+function reindex(){QI.clear();Q.forEach(q=>QI.set(String(q.i),q));}
+function qById(id){return QI.get(String(id))||null;}
+reindex();
 
 /* ---------- state ---------- */
 const LSKEY="dsa400_progress_v1";
 let P={};
 try{const raw=localStorage.getItem(LSKEY);if(raw){const o=JSON.parse(raw);if(o&&typeof o==="object"&&o&&!Array.isArray(o))P=o;}}catch(e){P={};}
+const DAYSKEY="dsa500_days_v1";
+let DAYS=[];
+try{const raw=localStorage.getItem(DAYSKEY);if(raw){const a=JSON.parse(raw);if(Array.isArray(a))DAYS=a.filter(x=>typeof x==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x));}}catch(e){DAYS=[];}
+function logDay(){const d=new Date(),k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");if(!DAYS.includes(k)){DAYS.push(k);DAYS.sort();saveDays();}}
+function saveDays(){try{localStorage.setItem(DAYSKEY,JSON.stringify(DAYS));}catch(e){}}
+const CKEY="dsa500_custom_v1";
+let CUSTOM={v:1,next:100001,items:[]};
+function loadCustom(){try{const raw=localStorage.getItem(CKEY);if(raw){const o=JSON.parse(raw);if(o&&typeof o==="object"&&Array.isArray(o.items)){const items=o.items.filter(it=>it&&typeof it==="object"&&Number.isFinite(it.id)&&it.id>=100001&&typeof it.title==="string"&&typeof it.link==="string");CUSTOM={v:1,next:Math.max(100001,+o.next||100001),items};CUSTOM.items.forEach(it=>{if(it.id>=CUSTOM.next)CUSTOM.next=it.id+1;});}}}catch(e){console.warn("Could not load custom questions",e);}}
+function saveCustom(){try{localStorage.setItem(CKEY,JSON.stringify(CUSTOM));}catch(e){toast("Could not save custom questions — localStorage unavailable");}}
+const topicName=k=>{const t=TOPICS.find(t=>t.key===k);return t?t.name:"Custom";};
+const isSQLTopic=k=>{const t=TOPICS.find(t=>t.key===k);return !!(t&&/^SQL /.test(t.phase));};
+function customQ(it){return{i:it.id,num:"C"+(it.id-100000),title:it.title,lc:it.lc||"—",d:it.d,pat:it.pat,co:it.co||"",skill:it.skill||PAT[it.pat].sig,nc:0,cx:"",topic:topicName(it.topicKey),phase:"Custom",topicKey:it.topicKey,cp:false,custom:true,link:it.link,src:it.src||"",blind:!!it.blind};}
+function rebuildCustom(){
+  for(let i=Q.length-1;i>=0;i--)if(Q[i].custom)Q.splice(i,1);
+  CUSTOM.items.forEach(it=>{if(PAT[it.pat]&&TOPICS.some(t=>t.key===it.topicKey))Q.push(customQ(it));});
+  reindex();
+}
 const DEF={s:0,r1:0,r2:0,m:0,h:[0,0,0],sol:0,notes:"",mis:0,learn:"",rem:"",att:0,last:0,sec:0,min:0,rv:0,pid:0};
-const get=id=>Object.assign({},DEF,Array.isArray(P[id]?P[id].h:null)?P[id]:(P[id]&&typeof P[id]==="object"?fixEntry(P[id]):{}));
+const get=id=>{const base=Array.isArray(P[id]?P[id].h:null)?P[id]:(P[id]&&typeof P[id]==="object"?fixEntry(P[id]):{});const o=Object.assign({},DEF,base);o.h=Array.isArray(base.h)?base.h.slice():[0,0,0];return o;};
 function fixEntry(e){const c=Object.assign({},e);if(!Array.isArray(c.h))c.h=[0,0,0];return c;}
 let saveT=null;
 function save(){try{localStorage.setItem(LSKEY,JSON.stringify(P));}catch(e){toast("Could not save — localStorage unavailable");}}
 function queueSave(){clearTimeout(saveT);saveT=setTimeout(save,350);}
-function set(id,patch){P[id]=Object.assign({},DEF,P[id]&&typeof P[id]==="object"?fixEntry(P[id]):{},patch);queueSave();updateTop();}
+function set(id,patch){const next=Object.assign({},DEF,P[id]&&typeof P[id]==="object"?fixEntry(P[id]):{},patch);if(next.m&&next.s<2)next.s=2;P[id]=next;queueSave();updateTop();}
 
 /* ---------- helpers ---------- */
 const $=s=>document.querySelector(s);
@@ -1717,18 +1760,19 @@ function toast(msg){const t=document.createElement("div");t.className="toast";t.
 function fmtSec(s){s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return(h?h+":":"")+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0");}
 function loggedSec(id){const g=get(id);let t=+g.sec||0;if(TIMERS[id])t+=(Date.now()-TIMERS[id].t0)/1000;return t;}
 function logAttempt(id){const g=get(id);set(id,{att:g.att+1,last:Date.now()});}
+loadCustom();rebuildCustom();
 
 /* ---------- timers ---------- */
 const TIMERS={};
 setInterval(()=>{document.querySelectorAll("[data-td]").forEach(el=>{el.textContent=fmtSec(loggedSec(+el.dataset.td));});},500);
-function pauseTimer(id){if(!TIMERS[id])return;const el=(Date.now()-TIMERS[id].t0)/1000;delete TIMERS[id];const g=get(id);set(id,{sec:Math.round(g.sec+el)});}
+function pauseTimer(id){if(!TIMERS[id])return;const el=(Date.now()-TIMERS[id].t0)/1000;delete TIMERS[id];const g=get(id);set(id,{sec:(+g.sec||0)+el});}
 function resetTimer(id){if(TIMERS[id])delete TIMERS[id];set(id,{sec:0});updateCardTimerBtns(id);}
-function startTimer(id){if(TIMERS[id])return;TIMERS[id]={t0:Date.now()};logAttempt(id);updateCardTimerBtns(id);}
-function updateCardTimerBtns(id){const c=document.querySelector('[data-qid="'+id+'"]');if(!c)return;const run=!!TIMERS[id];const b=c.querySelector('[data-act="tpause"]');if(b)b.innerHTML=run?ic("pause")+" Pause":ic("play")+" Start";}
-function persistTimers(){Object.keys(TIMERS).forEach(pauseTimer);if(Object.keys(P).length)save();clearTimeout(saveT);}
-window.addEventListener("beforeunload",persistTimers);
-window.addEventListener("pagehide",persistTimers);
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")persistTimers();});
+function startTimer(id){if(TIMERS[id])return;const fresh=(+get(id).sec||0)===0;TIMERS[id]={t0:Date.now()};if(fresh)logAttempt(id);logDay();updateCardTimerBtns(id);}
+function updateCardTimerBtns(id){const c=document.querySelector('article.q[data-qid="'+id+'"]');if(!c)return;const run=!!TIMERS[id];const b=c.querySelector('[data-act="tpause"]');if(b)b.innerHTML=run?ic("pause")+" Pause":ic("play")+" Start";}
+function checkpointTimers(){const now=Date.now();Object.keys(TIMERS).forEach(id=>{const el=(now-TIMERS[id].t0)/1000;set(id,{sec:(+get(id).sec||0)+el});TIMERS[id].t0=now;});clearTimeout(saveT);save();}
+window.addEventListener("beforeunload",checkpointTimers);
+window.addEventListener("pagehide",checkpointTimers);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")checkpointTimers();});
 
 /* ---------- icons (no emoji, ever) ---------- */
 const IC={
@@ -1753,9 +1797,10 @@ let F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",
 let SORT="cur";
 const EXP=new Set();
 let MIX={cur:null,seen:0};
-const PHASEGROUPS={"Phase 0 · Foundation":"Foundation","Phase 1 · Arrays, Strings & Hashing":"Arrays & Hashing","Phase 2 · Core Array Patterns":"Core Patterns","Phase 3 · Sorting, Lists, Stacks & Queues":"Lists · Stacks · Queues","Phase 4 · Recursion, Trees & BST":"Trees & BST","Phase 5 · Heaps & Priority Queues":"Heap","Phase 6 · Backtracking":"Backtracking","Phase 7 · Greedy & Intervals":"Greedy & Intervals","Phase 8–11 · Graph Algorithms":"Graphs","Phase 12 · Dynamic Programming":"DP","Phase 13 · Bit Manipulation":"Bits & Trie","Phase 14 · Tries":"Bits & Trie","Phase 15 · Advanced Patterns":"Advanced","SQL Phase 1 · Fundamentals":"SQL · Basics","SQL Phase 2 · Aggregation":"SQL · Basics","SQL Phase 3 · Joins":"SQL · Joins","SQL Phase 4 · Subqueries":"SQL · Subqueries","SQL Phase 5 · Conditional Logic":"SQL · Conditional","SQL Phase 6 · Functions":"SQL · Functions","SQL Phase 7 · Window Functions":"SQL · Window","SQL Phase 8 · Advanced Analytics":"SQL · Analytics","SQL Phase 9 · CTEs & Recursion":"SQL · Advanced","SQL Phase 10 · Interview SQL":"SQL · Real-World","Phase 16 · Gap Fillers":"Gap Fillers"};
+const PHASEGROUPS={"Phase 0 · Foundation":"Foundation","Phase 1 · Arrays, Strings & Hashing":"Arrays & Hashing","Phase 2 · Core Array Patterns":"Core Patterns","Phase 3 · Sorting, Lists, Stacks & Queues":"Lists · Stacks · Queues","Phase 4 · Recursion, Trees & BST":"Trees & BST","Phase 5 · Heaps & Priority Queues":"Heap","Phase 6 · Backtracking":"Backtracking","Phase 7 · Greedy & Intervals":"Greedy & Intervals","Phase 8–11 · Graph Algorithms":"Graphs","Phase 12 · Dynamic Programming":"DP","Phase 13 · Bit Manipulation":"Bits & Trie","Phase 14 · Tries":"Bits & Trie","Phase 15 · Advanced Patterns":"Advanced","SQL Phase 1 · Fundamentals":"SQL · Basics","SQL Phase 2 · Aggregation":"SQL · Basics","SQL Phase 3 · Joins":"SQL · Joins","SQL Phase 4 · Subqueries":"SQL · Subqueries","SQL Phase 5 · Conditional Logic":"SQL · Conditional","SQL Phase 6 · Functions":"SQL · Functions","SQL Phase 7 · Window Functions":"SQL · Window","SQL Phase 8 · Advanced Analytics":"SQL · Analytics","SQL Phase 9 · CTEs & Recursion":"SQL · Advanced","SQL Phase 10 · Interview SQL":"SQL · Real-World","Phase 16 · Gap Fillers":"Gap Fillers","Custom":"Custom"};
 
 /* ---------- stats ---------- */
+function daySet(){return new Set(DAYS.map(d=>new Date(d+"T00:00:00").toDateString()));}
 function stats(){
   const s={done:0,r1:0,r2:0,mast:0,ind:0,hintA:0,revisit:0,attempt:0,week:0,reviseToday:0};
   const now=Date.now();
@@ -1763,11 +1808,14 @@ function stats(){
     if(g.s===2||g.m)s.done++;if(g.r1)s.r1++;if(g.r2)s.r2++;if(g.m)s.mast++;
     if(g.sol===1)s.ind++;if(g.sol===2)s.hintA++;if(g.s===3)s.revisit++;if(g.s===1)s.attempt++;
     if(g.r1&&!g.r2)s.reviseToday++;
-    if(g.last&&now-g.last<6048e5&&(g.s===2||g.m))s.week++;});
+    if(!DAYS.length&&g.last&&now-g.last<6048e5&&(g.s===2||g.m))s.week++;});
+  if(DAYS.length)s.week=DAYS.filter(d=>{const t=new Date(d+"T00:00:00").getTime();return now-t<6048e5&&t<=now;}).length;
   return s;
 }
 function streak(){
-  const days=new Set();Q.forEach(q=>{const g=get(q.i);if(g.last)days.add(new Date(g.last).toDateString());});
+  let days;
+  if(DAYS.length)days=daySet();
+  else{days=new Set();Q.forEach(q=>{const g=get(q.i);if(g.last)days.add(new Date(g.last).toDateString());});}
   if(!days.size)return null;
   const d=new Date();if(!days.has(d.toDateString()))d.setDate(d.getDate()-1);
   let n=0;while(days.has(d.toDateString())){n++;d.setDate(d.getDate()-1);}
@@ -1781,18 +1829,18 @@ function filtered(){
   if(F.topic!=="all")arr=arr.filter(q=>q.topicKey===F.topic);
   if(F.phase!=="all")arr=arr.filter(q=>PHASEGROUPS[q.phase]===F.phase);
   if(F.diff!=="all")arr=arr.filter(q=>DIFFS[q.d]===F.diff);
-  if(F.pat!=="all")arr=arr.filter(q=>pat(q).l===F.pat);
+  if(F.pat!=="all")arr=arr.filter(q=>!isHidden(q)&&pat(q).l===F.pat);
   if(F.co!=="all")arr=arr.filter(q=>cos(q.co).includes(F.co));
   if(F.src!=="all")arr=arr.filter(q=>F.src==="NeetCode"?!!NC_SLUG[q.title]:true);
   if(F.st!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.st==="Solved"?(g.s===2||g.m):F.st==="Not Started"?(g.s===0&&!g.m):g.s===["Not Started","Attempted","Solved","Revisit"].indexOf(F.st);});
   if(F.rev!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.rev==="r1"?g.r1:F.rev==="r1x"?(!g.r1&&!g.m):F.rev==="r2"?g.r2:F.rev==="r2x"?!g.r2:F.rev==="m"?g.m:F.rev==="today"?(g.r1&&!g.r2):F.rev==="rv"?g.s===3:true;});
   if(F.hint!=="all")arr=arr.filter(q=>{const g=get(q.i);return F.hint==="none"?!g.h.some(x=>x):g.h[+F.hint-1]===1;});
   const t=F.q.trim().toLowerCase();
-  if(t)arr=arr.filter(q=>q.title.toLowerCase().includes(t)||q.lc===t||q.num===t.padStart(3,"0")||pat(q).l.toLowerCase().includes(t)||q.topic.toLowerCase().includes(t)||q.phase.toLowerCase().includes(t)||cos(q.co).some(c=>c.toLowerCase().includes(t)));
+  if(t)arr=arr.filter(q=>q.title.toLowerCase().includes(t)||q.lc===t||q.num===t.padStart(3,"0")||String(q.num).toLowerCase().includes(t)||(!isHidden(q)&&(pat(q).l.toLowerCase().includes(t)||(q.custom&&String(q.pat).toLowerCase().includes(t))))||q.topic.toLowerCase().includes(t)||q.phase.toLowerCase().includes(t)||cos(q.co).some(c=>c.toLowerCase().includes(t))||(q.custom&&(String(q.link||"").toLowerCase().includes(t)||String(q.src||"").toLowerCase().includes(t))));
   const cmp={
     cur:(a,b)=>a.i-b.i,
     diff:(a,b)=>a.d-b.d||a.i-b.i,
-    pat:(a,b)=>pat(a).l.localeCompare(pat(b).l)||a.i-b.i,
+    pat:(a,b)=>patLabel(a).localeCompare(patLabel(b))||a.i-b.i,
     topic:(a,b)=>a.topicKey.localeCompare(b.topicKey)||a.i-b.i,
     co:(a,b)=>(cos(a.co)[0]||"zz").localeCompare(cos(b.co)[0]||"zz")||a.i-b.i,
     done:(a,b)=>{const ga=get(a.i),gb=get(b.i);return(gb.m*4+gb.s)-(ga.m*4+ga.s)||a.i-b.i;},
@@ -1802,11 +1850,13 @@ function filtered(){
 }
 
 /* ---------- card rendering ---------- */
-function hiddenPattern(q){const g=get(q.i);return(q.cp||B30SET.has(q.i))&&!g.rv;}
+function isHidden(q){return(q.cp||B30SET.has(q.i)||q.blind)&&!get(q.i).rv;}
+function hiddenPattern(q){return isHidden(q);}
+function patLabel(q){return isHidden(q)?"":pat(q).l;}
 function sourcesHTML(q){
   const search=encodeURIComponent(q.title);
-  let h='<a class="srclnk" href="https://leetcode.com/problems/'+slug(q.title)+'/" target="_blank" rel="noopener noreferrer">LeetCode '+ic("ext")+'</a>';
-  const ncs=NC_SLUG[q.title];
+  let h=q.custom?'<a class="srclnk" href="'+esc(q.link)+'" target="_blank" rel="noopener noreferrer">LeetCode '+ic("ext")+'</a>':'<a class="srclnk" href="https://leetcode.com/problems/'+slug(q.title)+'/" target="_blank" rel="noopener noreferrer">LeetCode '+ic("ext")+'</a>';
+  const ncs=q.custom?null:NC_SLUG[q.title];
   if(ncs)h+=' <a class="srclnk" href="https://neetcode.io/problems/'+ncs+'" target="_blank" rel="noopener noreferrer">NeetCode '+ic("ext")+'</a>';
   h+=' <a class="srclnk" href="https://leetcode.com/problemset/?search='+search+'" target="_blank" rel="noopener noreferrer">Search on LeetCode '+ic("ext")+'</a>';
   return h;
@@ -1833,7 +1883,7 @@ function cardBodyHTML(q,g,hp,coms){
       ["—","Independent","With Hint","Needed Sol."].map((s,i)=>'<button data-act="sol" data-st="'+i+'" class="'+(g.sol===i?"on":"")+'">'+s+'</button>').join("")+'</div>'+
     '</div>'+
     '<div class="ctrlrow"><span class="klabel" style="margin:0 8px 0 0">Hints</span>'+
-      [0,1,2].map(n=>'<button class="chip '+(g.h[n]?"on":"")+'" data-act="hint" data-h="'+n+'">'+ic("bulb")+' '+(g.h[n]?"Hint "+(n+1)+" used":"Hint "+(n+1))+'</button>').join("")+
+      [0,1,2].map(n=>'<button class="chip '+(g.h[n]?"on":"")+'" data-act="hint" data-h="'+n+'"'+(hp?' disabled title="Reveal the pattern first"':'')+'>'+ic("bulb")+' '+(g.h[n]?"Hint "+(n+1)+" used":"Hint "+(n+1))+'</button>').join("")+
     '</div>'+
     '<div class="hintzone">'+[0,1,2].map(n=>g.h[n]&&!(hp)?'<div class="hintrow"><b>Hint '+(n+1)+' — '+["Pattern recognition","Direction","Final nudge"][n]+':</b> '+esc(pat(q).h[n])+'</div>':"").join("")+'</div>'+
     '<div class="qgrid2">'+
@@ -1851,10 +1901,11 @@ function cardBodyHTML(q,g,hp,coms){
       '<span class="tag mono">Stopwatch only</span>'+
       '<span class="tag mono">Attempts: '+g.att+'</span><button class="btn sm" data-act="att">+1</button>'+
       (g.last?'<span class="tag mono">Last: '+new Date(g.last).toLocaleDateString()+'</span>':"")+
-    '</div>';
+    '</div>'+
+    (q.custom?'<div class="ctrlrow" style="margin-top:14px"><button class="btn sm" data-act="cedit">Edit question</button><button class="btn sm dng" data-act="cdel">Delete question</button></div>':"");
 }
 function cardHTML(q,o){
-  o=o||{};const g=get(q.i),hp=hiddenPattern(q)&&!o.forcePattern,open=EXP.has(q.i)||o.open,cls=open?" open":"",st=["","st1","st2","st3"][g.s===2&&!g.m?2:g.s]||"";
+  o=o||{};const g=get(q.i),hp=(o.blind||isHidden(q))&&!o.forcePattern,open=EXP.has(q.i)||o.open,cls=open?" open":"",st=["","st1","st2","st3"][g.s===2&&!g.m?2:g.s]||"";
   const coms=cos(q.co);
   return '<article class="card q '+st+cls+'" data-qid="'+q.i+'">'+
   '<header class="qh" data-act="tog" role="button" tabindex="0" aria-expanded="'+open+'" aria-controls="qb'+q.i+'"><span class="qnum">'+q.num+'</span>'+
@@ -1862,6 +1913,8 @@ function cardHTML(q,o){
   '<span class="tag '+DCLS[q.d]+'">'+DIFFS[q.d]+'</span>'+
   (hp?'<span class="tag" style="border-style:dashed">'+(q.cp?"Pattern hidden · checkpoint":"Pattern hidden")+'</span>':'<span class="pchip">'+esc(pat(q).l)+'</span>')+
   '<span class="tag">'+esc(q.topic)+'</span><span class="tag mono">LC '+q.lc+'</span>'+
+  (q.custom?'<span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">CUSTOM</span>':"")+
+  (q.src?'<span class="tag">'+esc(q.src)+'</span>':"")+
   (q.cp?'<span class="tag" style="color:var(--acc);border-color:var(--acc-dim)">CHECKPOINT</span>':"")+
   '</div></div>'+
   '<div class="qco">'+coms.slice(0,3).map(c=>'<span class="cotag">'+c+'</span>').join("")+(coms.length>3?'<span class="cotag">+'+(coms.length-3)+'</span>':"")+'</div>'+
@@ -1875,7 +1928,8 @@ const NAV=[
  ["dash","Dashboard",null],["list","All Problems",null],["_p","PATTERNS",""],
  ["pat","Patterns & Topics",null],["list","Revision 1","r1"],["list","Revision 2","r2"],["list","Mastered","m"],["list","Needs Revisit","rv"],
  ["_m","PRACTICE",""],["mixed","Mixed Practice",null],["f50","Final Revision Set · 50",null],["blind","Blind Pattern Test · 30",null],
- ["_a","TRACKING",""],["mist","Mistake Tracker",null],["settings","Settings",null]
+  ["_a","TRACKING",""],["mist","Mistake Tracker",null],
+  ["_l","LIBRARY",""],["pguide","Pattern Guide",null],["add","Add Question",null],["settings","Settings",null]
 ];
 function renderNav(){
   $("#nav").innerHTML=NAV.map(n=>{
@@ -1884,6 +1938,8 @@ function renderNav(){
     let cnt="";
     if(n[2]==="r1")cnt=stats().r1;if(n[2]==="r2")cnt=stats().r2;if(n[2]==="m")cnt=stats().mast;if(n[2]==="rv")cnt=stats().revisit;
     if(n[0]==="list"&&!n[2])cnt=Q.length;
+    if(n[0]==="pguide")cnt=Object.keys(PAT).length;
+    if(n[0]==="add")cnt=CUSTOM.items.length;
     return'<button class="nv '+(active?"on":"")+'" data-nav="'+n[0]+'" data-rev="'+(n[2]||"")+'">'+n[1]+(cnt!==""?'<span class="cnt">'+cnt+'</span>':"")+'</button>';
   }).join("");
 }
@@ -1892,18 +1948,19 @@ function renderDash(){
   const s=stats(),sk=streak();
   let h='<h2 class="vh">Dashboard</h2><p class="vs">Your entire curriculum at a glance — every tick below is one of the '+Q.length+' questions.</p>';
   h+='<div class="card hero"><div><div class="big">'+s.done+'<span> / '+Q.length+'</span></div><div class="pct">'+(s.done/Q.length*100).toFixed(1)+'% complete · '+s.mast+' mastered <button class="btn sm" data-act="nextunsolved" style="margin-left:10px">Next unsolved</button></div></div><div class="hright"><div><b>'+s.ind+'</b> solved independently · <b>'+s.hintA+'</b> hint-assisted</div><div><b>'+s.week+'</b> solved this week · streak: <b>'+(sk||"—")+'</b>'+(sk===null?' <span style="font-size:10px">(no attempt dates yet)</span>':"")+'</div><div style="margin-top:6px;font-size:11px;color:var(--faint)">Revision 1: '+s.r1+' · Revision 2: '+s.r2+' · Revise today: '+s.reviseToday+' · Revisit queue: '+s.revisit+'</div></div></div>';
-  h+='<div class="card"><div class="strip" style="--stripcols:'+Q.length+'">'+Q.map(q=>{const g=get(q.i);const c=g.s===2||g.m?"st2":g.s===1?"st1":g.s===3?"st3":"";const r=(g.r1||g.r2||g.m)?" rv":"";return'<i class="'+c+r+'" data-tick="'+q.i+'" title="#'+q.num+' · '+esc(q.title)+'"></i>';}).join("")+'</div><div class="striplegend"><span><b style="background:var(--sur2)"></b>Not started</span><span><b style="background:var(--teal)"></b>Attempted</span><span><b style="background:var(--grn)"></b>Solved</span><span><b style="background:var(--red)"></b>Revisit</span><span><b style="background:var(--sur2);box-shadow:0 0 0 1px var(--acc)"></b>Revision underway</span></div></div>';
+  h+='<div class="card"><div class="strip">'+Q.map(q=>{const g=get(q.i);const c=g.s===2||g.m?"st2":g.s===1?"st1":g.s===3?"st3":"";const r=(g.r1||g.r2||g.m)?" rv":"";return'<i class="'+c+r+'" data-tick="'+q.i+'" title="#'+q.num+' · '+esc(q.title)+'"></i>';}).join("")+'</div><div class="striplegend"><span><b style="background:var(--sur2)"></b>Not started</span><span><b style="background:var(--teal)"></b>Attempted</span><span><b style="background:var(--grn)"></b>Solved</span><span><b style="background:var(--red)"></b>Revisit</span><span><b style="background:var(--sur2);box-shadow:0 0 0 1px var(--acc)"></b>Revision underway</span></div></div>';
   h+='<div class="statgrid">'+
    [["Completed",s.done,"g",1],["Revision 1",s.r1,"",1],["Revision 2",s.r2,"",1],["Mastered",s.mast,"g",1],["Independent solves",s.ind,"a",1],["Hint-assisted",s.hintA,"t",1],["Needs revisit",s.revisit,"r",1],["Attempted (open)",s.attempt,"t",1],["Revise today",s.reviseToday,"",1],["Solved this week",s.week,"",0],["Practice streak",(sk===null?"—":sk+"d"),"",0]].map(x=>'<div class="card stat '+x[2]+'"><div class="n">'+x[1]+(x[3]?'<small> / '+Q.length+'</small>':"")+'</div><div class="l">'+x[0]+'</div></div>').join("")+'</div>';
   h+='<div class="card"><div style="padding:14px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:baseline;gap:12px"><b>Topic progress</b><span style="font-size:11px;color:var(--faint)">click a topic to open it</span></div>'+
-  TOPICS.map(t=>{const c=Q.slice(t.start,t.start+t.count).filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;return'<div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+'</small></div><div class="bar g"><i style="width:'+(c/t.count*100)+'%"></i></div><div class="tv mono">'+c+' / '+t.count+'</div></div>';}).join("")+'</div>';
+  TOPICS.map(t=>{const qs=Q.filter(q=>q.topicKey===t.key);const c=qs.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;return'<div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+'</small></div><div class="bar g"><i style="width:'+(qs.length?c/qs.length*100:0)+'%"></i></div><div class="tv mono">'+c+' / '+qs.length+'</div></div>';}).join("")+'</div>';
   h+='<details class="cheat card"><summary>Pattern recognition cheat sheet</summary><table class="cheattbl"><tr><th>Problem signal</th><th>Consider</th></tr>'+CHEAT.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")+'</table></details>';
   return h;
 }
 function filterBar(){
-  const pats=[...new Set(Q.map(q=>pat(q).l))].sort();
+  const pats=[...new Set(Q.filter(q=>!isHidden(q)).map(q=>pat(q).l))].sort();
   const coset=[...new Set(Q.flatMap(q=>cos(q.co)))].sort();
-  const sel=(id,label,opts,cur)=>'<label>'+label+'<select data-f="'+id+'"><option value="all">All</option>'+opts.map(o=>'<option'+(cur===o?" selected":"")+'>'+o+'</option>').join("")+'</select></label>';
+  const sel=(id,label,opts,cur)=>'<label>'+esc(label)+'<select data-f="'+id+'"><option value="all">All</option>'+opts.map(o=>'<option value="'+esc(o)+'"'+(cur===o?" selected":"")+'>'+esc(o)+'</option>').join("")+'</select></label>';
+  const sel2=(id,label,pairs,cur)=>'<label>'+esc(label)+'<select data-f="'+id+'">'+pairs.map(o=>'<option value="'+esc(o[0])+'"'+(cur===o[0]?" selected":"")+'>'+esc(o[1])+'</option>').join("")+'</select></label>';
   return'<div class="card filters">'+
   sel("topic","Topic",TOPICS.map(t=>t.name),F.topic==="all"?"all":(TOPICS.find(t=>t.key===F.topic)||{name:"all"}).name)+
   sel("phase","Phase",[...new Set(Object.values(PHASEGROUPS))],F.phase)+
@@ -1912,7 +1969,7 @@ function filterBar(){
   sel("co","Company",coset,F.co)+
   sel("src","Source",["LeetCode","NeetCode"],F.src)+
   sel("st","Status",["Not Started","Attempted","Solved","Revisit"],F.st)+
-  sel("rev","Revision",["r1x","r1","r2x","r2","m","today","rv"],F.rev).replace(/<option( selected)?>(r1x|r1|r2x|r2|m|today|rv)<\/option>/g,(m,sel,v)=>{const names={r1x:"Rev 1 incomplete",r1:"Rev 1 complete",r2x:"Rev 2 incomplete",r2:"Rev 2 complete",m:"Mastered",today:"Revise today",rv:"Needs Revisit"};return'<option value="'+v+'"'+(sel||"")+'>'+names[v]+'</option>';})+
+  sel2("rev","Revision",[["all","All"],["r1x","Rev 1 incomplete"],["r1","Rev 1 complete"],["r2x","Rev 2 incomplete"],["r2","Rev 2 complete"],["m","Mastered"],["today","Revise today"],["rv","Needs Revisit"]],F.rev)+
   '<label>Hint<select data-f="hint"><option value="all">All</option>'+[["none","No hints used"],["1","Hint 1 used"],["2","Hint 2 used"],["3","Hint 3 used"]].map(o=>'<option value="'+o[0]+'"'+(F.hint===o[0]?" selected":"")+'>'+o[1]+'</option>').join("")+'</select></label>'+
   '<label>Sort<select data-f="sort"><option value="cur">Curriculum order</option><option value="diff"'+(SORT==="diff"?" selected":"")+'>Difficulty</option><option value="pat"'+(SORT==="pat"?" selected":"")+'>Pattern</option><option value="topic"'+(SORT==="topic"?" selected":"")+'>Topic</option><option value="co"'+(SORT==="co"?" selected":"")+'>Company</option><option value="done"'+(SORT==="done"?" selected":"")+'>Completion</option><option value="rev"'+(SORT==="rev"?" selected":"")+'>Revision status</option></select></label>'+
   '<button class="btn sm freset" data-act="clearf">Reset filters</button></div>';
@@ -1932,8 +1989,8 @@ function renderList(){
 function renderPatterns(){
   const phaseCount=new Set(TOPICS.map(t=>t.phase)).size;
   let h='<h2 class="vh">Patterns & Topics</h2><p class="vs">'+TOPICS.length+' sections across '+phaseCount+' phases. Each one is a repeatable way of thinking, not a topic to memorize.</p>';
-  h+=TOPICS.map(t=>{const qs=Q.slice(t.start,t.start+t.count);const c=qs.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;
-    return'<div class="card" style="margin-bottom:10px"><div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+' · '+qs.length+' problems</small></div><div class="bar g"><i style="width:'+(c/t.count*100)+'%"></i></div><div class="tv mono">'+c+' / '+t.count+'</div></div></div>';}).join("");
+  h+=TOPICS.map(t=>{const qs=Q.filter(q=>q.topicKey===t.key);const c=qs.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;
+    return'<div class="card" style="margin-bottom:10px"><div class="topicrow" data-topic="'+t.key+'"><div class="tn">'+t.name+'<small>'+t.phase+' · '+qs.length+' problems</small></div><div class="bar g"><i style="width:'+(qs.length?c/qs.length*100:0)+'%"></i></div><div class="tv mono">'+c+' / '+qs.length+'</div></div></div>';}).join("");
   return h;
 }
 function renderMixed(){
@@ -1944,8 +2001,8 @@ function renderMixed(){
     '<button class="btn pri" data-act="mixnew">'+ic("dice")+' Draw a problem</button></div></div>';
     return h;
   }
-  const q=Q[MIX.cur];
-  h+='<div class="focushead"><button class="btn sm" data-act="mixnew">'+ic("dice")+' Next problem</button><span class="tag mono">draw #'+(MIX.seen)+'</span></div>'+cardHTML(q,{open:true,forcePattern:false});
+  const q=qById(MIX.cur);
+  h+='<div class="focushead"><button class="btn sm" data-act="mixnew">'+ic("dice")+' Next problem</button><span class="tag mono">draw #'+(MIX.seen)+'</span></div>'+cardHTML(q,{blind:true});
   return h;
 }
 let MIXDF=0;
@@ -1962,9 +2019,9 @@ function drawMixed(){
 function renderF50(){
   let h='<h2 class="vh">Final Revision Set — 50 problems</h2><p class="vs">A balanced spread across every major pattern. Work through it with the Revision 1 → Revision 2 → Mastered pipeline.</p>';
   const done=inF50.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length,mast=inF50.filter(q=>get(q.i).m).length;
-  h+='<div class="card" style="padding:20px;margin-bottom:16px"><div style="display:flex;gap:30px;flex-wrap:wrap;margin-bottom:14px"><div><div class="scorebig">'+done+'<small style="font-size:14px;color:var(--faint)"> / 50</small></div><div style="font-size:11.5px;color:var(--mut)">solved</div></div><div><div class="scorebig" style="color:var(--grn)">'+mast+'<small style="font-size:14px;color:var(--faint)"> / 50</small></div><div style="font-size:11.5px;color:var(--mut)">mastered</div></div></div><div class="bar g"><i style="width:'+(mast/50*100)+'%"></i></div></div>';
+  h+='<div class="card" style="padding:20px;margin-bottom:16px"><div style="display:flex;gap:30px;flex-wrap:wrap;margin-bottom:14px"><div><div class="scorebig">'+done+'<small style="font-size:14px;color:var(--faint)"> / '+inF50.length+'</small></div><div style="font-size:11.5px;color:var(--mut)">solved</div></div><div><div class="scorebig" style="color:var(--grn)">'+mast+'<small style="font-size:14px;color:var(--faint)"> / '+inF50.length+'</small></div><div style="font-size:11.5px;color:var(--mut)">mastered</div></div></div><div class="bar g"><i style="width:'+(inF50.length?mast/inF50.length*100:0)+'%"></i></div></div>';
   h+='<div class="card">'+inF50.map(q=>{const g=get(q.i);
-    return'<div class="mrow"><div class="mt"><div class="t">#'+q.num+' · '+esc(q.title)+'</div><div class="m">'+DIFFS[q.d]+' · '+esc(pat(q).l)+' · '+esc(q.topic)+'</div></div>'+
+    return'<div class="mrow" data-qid="'+q.i+'"><div class="mt"><div class="t">#'+q.num+' · '+esc(q.title)+'</div><div class="m">'+DIFFS[q.d]+' · '+esc(pat(q).l)+' · '+esc(q.topic)+'</div></div>'+
     '<button class="chip '+(g.r1?"on":"")+'" data-act="r1">R1</button><button class="chip '+(g.r2?"on":"")+'" data-act="r2">R2</button><button class="chip '+(g.m?"on":"")+'" data-act="m">M</button>'+
     '<button class="btn sm" data-act="open" data-id="'+q.i+'">Open</button></div>';}).join("")+'</div>';
   return h;
@@ -1972,9 +2029,9 @@ function renderF50(){
 function renderBlind(){
   const ident=inB30.filter(q=>get(q.i).pid).length,rev=inB30.filter(q=>get(q.i).rv).length;
   let h='<h2 class="vh">Blind Pattern Test — 30 problems</h2><p class="vs">Patterns and hints are hidden. Read the problem, decide the pattern in your head (or on paper), reveal, and honestly tick whether you identified it.</p>';
-  h+='<div class="card" style="padding:20px;margin-bottom:16px;display:flex;gap:30px;flex-wrap:wrap"><div><div class="scorebig">'+ident+'<small style="font-size:14px;color:var(--faint)"> / 30</small></div><div style="font-size:11.5px;color:var(--mut)">pattern identified</div></div><div><div class="scorebig" style="color:var(--teal)">'+rev+'<small style="font-size:14px;color:var(--faint)"> / 30</small></div><div style="font-size:11.5px;color:var(--mut)">revealed so far</div></div></div>';
+  h+='<div class="card" style="padding:20px;margin-bottom:16px;display:flex;gap:30px;flex-wrap:wrap"><div><div class="scorebig">'+ident+'<small style="font-size:14px;color:var(--faint)"> / '+inB30.length+'</small></div><div style="font-size:11.5px;color:var(--mut)">pattern identified</div></div><div><div class="scorebig" style="color:var(--teal)">'+rev+'<small style="font-size:14px;color:var(--faint)"> / '+inB30.length+'</small></div><div style="font-size:11.5px;color:var(--mut)">revealed so far</div></div></div>';
   h+='<div class="card">'+inB30.map(q=>{const g=get(q.i);
-    return'<div class="mrow"><div class="mt"><div class="t">#'+q.num+' · '+esc(q.title)+'</div><div class="m">'+DIFFS[q.d]+' · LC '+q.lc+' · '+(g.rv?esc(pat(q).l):'pattern hidden')+'</div></div>'+
+    return'<div class="mrow" data-qid="'+q.i+'"><div class="mt"><div class="t">#'+q.num+' · '+esc(q.title)+'</div><div class="m">'+DIFFS[q.d]+' · LC '+q.lc+' · '+(g.rv?esc(pat(q).l):'pattern hidden')+'</div></div>'+
     (g.rv?"":'<button class="btn sm" data-act="reveal">'+ic("eye")+' Reveal</button>')+
     '<button class="chip '+(g.pid?"on":"")+'" data-act="pid">I identified it</button>'+
     '<button class="btn sm" data-act="open" data-id="'+q.i+'">Open</button></div>';}).join("")+'</div>';
@@ -1991,14 +2048,177 @@ function renderMist(){
     return'<div class="mrow"><div class="mt"><div class="t">#'+q.num+' · '+esc(q.title)+'</div><div class="m">'+MIS[g.mis]+(g.learn?' · learned: '+esc(g.learn):"")+(g.rem?' · remember: '+esc(g.rem):"")+'</div></div><button class="btn sm" data-act="open" data-id="'+q.i+'">Open</button></div>';}).join("")+'</div>';
   return h;
 }
+let PG={q:"",domain:"all",sort:"alpha"};
+function freshAdd(){return{title:"",link:"",lc:"",d:1,pat:"",topic:"",co:"",src:"",skill:"",blind:false,err:{},editId:null,bulk:"",cfilter:"all"};}
+let ADDF=freshAdd(),BULKROWS=null,PENDING_DEL=null,BULKOPEN=false;
+const LINKRE=/^https:\/\/(?:www\.)?leetcode\.com\/problems\/([a-z0-9-]+)(?:\/|$)/;
+function normLink(raw){const s=String(raw||"").trim(),m=s.match(LINKRE);return m?"https://leetcode.com/problems/"+m[1]+"/":null;}
+function keyForTitle(t){return String(t||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"");}
+function patternDomain(k){
+  const qs=Q.filter(q=>q.pat===k&&!q.custom);
+  if(qs.length){const sql=qs.filter(q=>isSQLTopic(q.topicKey)).length;return sql*2>=qs.length?"SQL":"DSA";}
+  return /^SQL /.test(PAT[k].pr)?"SQL":"DSA";
+}
+function patternTopic(k){
+  const c={};Q.filter(q=>q.pat===k&&!q.custom).forEach(q=>{c[q.topicKey]=(c[q.topicKey]||0)+1;});
+  const keys=Object.keys(c);
+  if(keys.length)return keys.sort((a,b)=>c[b]-c[a])[0];
+  const want=patternDomain(k);return(TOPICS.find(t=>(/^SQL /.test(t.phase))===(want==="SQL"))||TOPICS[0]).key;
+}
+function patternStats(k){
+  const qs=Q.filter(q=>q.pat===k),solved=qs.filter(q=>{const g=get(q.i);return g.s===2||g.m;}).length;
+  return{n:qs.length,solved,custom:qs.filter(q=>q.custom).length};
+}
+function patternFamily(k){
+  const c={};Q.filter(q=>q.pat===k).forEach(q=>{c[q.topicKey]=(c[q.topicKey]||0)+1;});
+  const keys=Object.keys(c);
+  return keys.length?topicName(keys.sort((a,b)=>c[b]-c[a])[0]):"Not used yet";
+}
+function patternOptions(sel){
+  return["DSA","SQL"].map(d=>'<optgroup label="'+d+'">'+Object.keys(PAT).filter(k=>patternDomain(k)===d).map(k=>'<option value="'+esc(k)+'"'+(sel===k?" selected":"")+'>'+esc(PAT[k].l)+'</option>').join("")+'</optgroup>').join("");
+}
+function patPreview(k){
+  if(!PAT[k])return'<span style="color:var(--faint)">Choose a pattern to see its subject, signal and prerequisites.</span>';
+  const p=PAT[k];return'<span class="mono" style="font-size:11px">'+esc(patternDomain(k))+' · '+esc(p.sc)+'</span><br><span style="font-size:12px;color:var(--mut)">'+esc(p.sig)+'</span><br><span style="font-size:11px;color:var(--faint)">Prerequisites: '+esc(p.pr)+'</span>';
+}
+function rerenderFocused(sel){render();const el=$(sel);if(el){el.focus();const v=el.value;el.value="";el.value=v;}}
+function validateAdd(a,seen){
+  const err={};
+  a.title=String(a.title||"").trim();a.src=String(a.src||"").trim();a.skill=String(a.skill||"").trim();
+  if(a.title.length<3||a.title.length>120)err.title="Question name must be 3–120 characters.";
+  else{const k=keyForTitle(a.title);if((seen&&seen.titles.has(k))||Q.some(q=>q.i!==a.editId&&keyForTitle(q.title)===k))err.title="A question with this name already exists.";}
+  const link=normLink(a.link);if(!link)err.link="Enter a LeetCode URL beginning https://leetcode.com/problems/";
+  const lc=String(a.lc||"").trim();
+  if(lc&&!/^\d+$/.test(lc))err.lc="LeetCode number must contain digits only.";
+  else if(lc&&((seen&&seen.lcs.has(lc))||BYLC[lc]||Q.some(q=>q.i!==a.editId&&String(q.lc)===lc)))err.lc="That LeetCode number is already in the bank.";
+  if(!PAT[a.pat])err.pat="Choose an existing pattern from the list.";
+  if(!TOPICS.some(t=>t.key===a.topic))err.topic="Choose an existing topic.";
+  else if(PAT[a.pat]&&patternDomain(a.pat)!==(isSQLTopic(a.topic)?"SQL":"DSA"))err.topic="Topic domain must match the pattern domain.";
+  if(a.src.length>60)err.src="Source / tag must be 60 characters or fewer.";
+  if(a.skill.length>160)err.skill="Logic skill must be 160 characters or fewer.";
+  if(Object.keys(err).length)return{ok:false,err};
+  if(seen){seen.titles.add(keyForTitle(a.title));if(lc)seen.lcs.add(lc);}
+  return{ok:true,item:{title:a.title,link,lc:lc||"—",d:+a.d,pat:a.pat,topicKey:a.topic,co:String(a.co||"").split("").filter(x=>COMAP[x]).join(""),src:a.src,skill:a.skill||PAT[a.pat].sig,blind:!!a.blind}};
+}
+function renderPGuide(){
+  const keys=Object.keys(PAT),dsa=keys.filter(k=>patternDomain(k)==="DSA").length;
+  let h='<h2 class="vh">Pattern Guide</h2><p class="vs">'+keys.length+' patterns available — '+dsa+' DSA and '+(keys.length-dsa)+' SQL. Questions you add can only join these existing patterns; new patterns cannot be created from the UI.</p>';
+  h+='<div class="card filters">'+
+    '<label>Search<input class="tin" data-pg="q" value="'+esc(PG.q)+'" placeholder="Label, subject or signal" style="max-width:220px"></label>'+
+    '<label>Domain<div class="seg">'+["all","DSA","SQL"].map(d=>'<button class="'+(PG.domain===d?"on":"")+'" data-pg="domain" data-v="'+d+'">'+d+'</button>').join("")+'</div></label>'+
+    '<label>Sort<select data-pg="sort">'+[["alpha","Alphabetical"],["count","Most questions"],["weak","Weakest first"]].map(o=>'<option value="'+o[0]+'"'+(PG.sort===o[0]?" selected":"")+'>'+o[1]+'</option>').join("")+'</select></label>'+
+    '</div>';
+  const s=PG.q.trim().toLowerCase();
+  let list=keys.filter(k=>{const p=PAT[k];return(!s||[p.l,p.sc,p.sig].some(x=>String(x).toLowerCase().includes(s)))&&(PG.domain==="all"||patternDomain(k)===PG.domain);});
+  list.sort((a,b)=>{
+    if(PG.sort==="count")return patternStats(b).n-patternStats(a).n||PAT[a].l.localeCompare(PAT[b].l);
+    if(PG.sort==="weak"){const A=patternStats(a),B=patternStats(b);return(A.n?A.solved/A.n:0)-(B.n?B.solved/B.n:0)||PAT[a].l.localeCompare(PAT[b].l);}
+    return PAT[a].l.localeCompare(PAT[b].l);
+  });
+  if(!list.length)return h+'<div class="card empty">No patterns match those filters.</div>';
+  const groups={};list.forEach(k=>{const f=patternFamily(k);(groups[f]=groups[f]||[]).push(k);});
+  h+=Object.keys(groups).sort((a,b)=>a==="Not used yet"?1:b==="Not used yet"?-1:a.localeCompare(b)).map(f=>{
+    let g='<div style="margin-top:18px"><div class="navsec" style="padding-left:0">'+esc(f)+'</div>';
+    g+='<div class="statgrid" style="margin-top:8px">'+groups[f].map(k=>{
+      const p=PAT[k],st=patternStats(k),pct=st.n?st.solved/st.n*100:0;
+      return'<div class="card pgcard"><div class="pgt">'+esc(p.l)+'</div><div class="pgm">'+esc(p.sc)+' · '+esc(p.cx)+'</div>'+
+        '<div style="font-size:12.5px;color:var(--mut);margin-top:8px">'+esc(p.sig)+'</div>'+
+        '<div class="pgm" style="margin-top:6px">Prerequisites: '+esc(p.pr)+'</div>'+
+        '<div class="bar g" style="margin-top:10px"><i style="width:'+pct+'%"></i></div>'+
+        '<div class="pgm" style="margin-top:6px">'+st.n+' questions · '+st.solved+' solved · '+st.custom+' custom</div>'+
+        '<div class="pgrow"><details><summary class="btn sm">Hint ladder</summary><div style="padding:8px 0;font-size:12.5px;color:var(--mut)">'+p.h.map((x,i)=>'<div class="hintrow"><b>'+["Recognition","Direction","Final nudge"][i]+':</b> '+esc(x)+'</div>').join("")+'</div></details>'+
+        '<button class="btn sm" data-act="pgpractice" data-k="'+esc(k)+'">Practice</button>'+
+        '<button class="btn sm" data-act="pgadd" data-k="'+esc(k)+'">Add question here</button></div></div>';
+    }).join("")+'</div></div>';
+    return g;
+  }).join("");
+  return h;
+}
+function addFormHTML(){
+  const a=ADDF,e=a.err,er=k=>e[k]?'<div class="err">'+esc(e[k])+'</div>':'';
+  const dom=a.pat?patternDomain(a.pat):null;
+  const topics=TOPICS.filter(t=>!dom||(isSQLTopic(t.key)?"SQL":"DSA")===dom);
+  return'<div style="font-size:15px;margin-bottom:14px"><b>'+(a.editId?"Edit custom question":"New custom question")+'</b></div>'+
+  '<div class="formgrid">'+
+    '<div class="fld"><span>Question name *</span><input class="tin" data-add="title" value="'+esc(a.title)+'" placeholder="e.g. Longest Happy Prefix">'+er("title")+'</div>'+
+    '<div class="fld"><span>LeetCode link *</span><input class="tin" data-add="link" value="'+esc(a.link)+'" placeholder="https://leetcode.com/problems/…">'+er("link")+'</div>'+
+    '<div class="fld"><span>LeetCode number</span><input class="tin" data-add="lc" value="'+esc(a.lc)+'" inputmode="numeric" placeholder="Optional">'+er("lc")+'</div>'+
+    '<div class="fld"><span>Difficulty *</span><select class="tin" data-add="d">'+DIFFS.map((d,i)=>'<option value="'+i+'"'+(a.d===i?" selected":"")+'>'+d+'</option>').join("")+'</select></div>'+
+    '<div class="fld"><span>Pattern * — existing only</span><select class="tin" data-add="pat"><option value="">Choose a pattern…</option>'+patternOptions(a.pat)+'</select>'+er("pat")+'<div id="patpreview">'+patPreview(a.pat)+'</div></div>'+
+    '<div class="fld"><span>Topic * — suggested from pattern</span><select class="tin" data-add="topic"><option value="">Choose a topic…</option>'+topics.map(t=>'<option value="'+esc(t.key)+'"'+(a.topic===t.key?" selected":"")+'>'+esc(t.name)+'</option>').join("")+'</select>'+er("topic")+'</div>'+
+  '</div>'+
+  '<div class="fld" style="margin-top:14px"><span>Companies — historically reported</span><div class="ctrlrow">'+Object.keys(COMAP).map(c=>'<button type="button" class="cochip '+((a.co||"").includes(c)?"on":"")+'" data-act="coco" data-c="'+c+'">'+esc(COMAP[c])+'</button>').join("")+'</div></div>'+
+  '<div class="formgrid" style="margin-top:8px">'+
+    '<div class="fld"><span>Source / tag — optional</span><input class="tin" data-add="src" value="'+esc(a.src)+'" placeholder="e.g. Amazon OA">'+er("src")+'</div>'+
+    '<div class="fld"><span>Logic skill — optional</span><input class="tin" data-add="skill" value="'+esc(a.skill)+'" placeholder="Defaults to pattern signal">'+er("skill")+'</div>'+
+  '</div>'+
+  '<label class="ctrlrow" style="margin-top:14px"><input type="checkbox" data-add="blind"'+(a.blind?" checked":"")+'> Hide the pattern until I reveal it</label>'+
+  '<div class="ctrlrow" style="margin-top:14px"><button class="btn pri" data-act="cadd">'+(a.editId?"Save changes":"Add question")+'</button>'+(a.editId?"":'<button class="btn" data-act="caddnext">Add &amp; add another</button>')+'<button class="btn" data-act="cclear">Clear</button></div>';
+}
+function bulkTableHTML(){
+  return'<table class="bulkTbl"><tr><th>Line</th><th>Result</th><th>Reason / row</th></tr>'+BULKROWS.map(r=>'<tr><td class="mono">'+r.n+'</td><td class="'+(r.ok?"ok":"bad")+'">'+(r.ok?"OK":"BAD")+'</td><td>'+esc(r.reason)+' — '+esc(r.line)+'</td></tr>').join("")+'</table>';
+}
+function renderAdd(){
+  let h='<h2 class="vh">Add Question</h2><p class="vs">Add your own free LeetCode problems. Patterns are a closed set — you can only map to the '+Object.keys(PAT).length+' patterns that already exist. Definitions are saved in this browser.</p>';
+  h+='<div class="card" style="padding:20px;margin-bottom:16px">'+addFormHTML()+'</div>';
+  h+='<details class="cheat card" style="margin-bottom:16px"'+(BULKOPEN?" open":"")+'><summary>Bulk add — one per line</summary><div style="padding:0 18px 18px">'+
+    '<div class="fld"><span>Title | LeetCode link | Easy/Medium/Hard | Pattern label or key | Companies, comma-separated</span>'+
+    '<textarea class="tnote" data-add="bulk" style="min-height:130px;margin-top:8px" placeholder="Merge Strings Alternately | https://leetcode.com/problems/merge-strings-alternately/ | Easy | Two Pointers | a,g">'+esc(ADDF.bulk||"")+'</textarea></div>'+
+    '<div class="ctrlrow" style="margin-top:12px"><button class="btn" data-act="bulkpreview">Preview</button><button class="btn pri" data-act="bulkadd">Add valid rows</button></div>'+
+    (BULKROWS?bulkTableHTML():"")+'</div></details>';
+  const items=CUSTOM.items;
+  h+='<div class="card"><div style="padding:14px 18px;border-bottom:1px solid var(--bd);display:flex;gap:12px;align-items:center;flex-wrap:wrap"><b>My custom questions</b><span class="tag mono">'+items.length+'</span>'+
+    '<label style="margin-left:auto;font-family:JetBrains Mono,monospace;font-size:10px;color:var(--faint)">Filter by pattern<select class="tin" style="width:auto;margin-left:6px" data-add="cfilter"><option value="all">All</option>'+Object.keys(PAT).filter(k=>items.some(i=>i.pat===k)).map(k=>'<option value="'+esc(k)+'"'+(ADDF.cfilter===k?" selected":"")+'>'+esc(PAT[k].l)+'</option>').join("")+'</select></label></div>';
+  const shown=items.filter(it=>ADDF.cfilter==="all"||it.pat===ADDF.cfilter);
+  if(!shown.length)h+='<div class="empty">No custom questions match.</div>';
+  else h+=shown.map(it=>'<div class="mrow" data-qid="'+it.id+'"><div class="mt"><div class="t">'+esc(it.title)+'</div><div class="m">'+DIFFS[it.d]+' · '+esc(PAT[it.pat].l)+' · '+esc(topicName(it.topicKey))+' · LC '+esc(it.lc||"—")+'</div></div>'+
+    '<button class="btn sm" data-act="cedit">Edit</button><button class="btn sm dng" data-act="cdel">Delete</button></div>').join("");
+  return h+'</div>';
+}
+function parseBulk(){
+  const lines=String(ADDF.bulk||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const seen={titles:new Set(),lcs:new Set()},rows=[];
+  lines.forEach((line,n)=>{
+    const parts=line.split("|").map(x=>x.trim()),r={n:n+1,line,ok:false,reason:"",item:null};
+    if(parts.length<4){r.reason="Expected 4 or 5 pipe-separated fields";rows.push(r);return;}
+    const d=DIFFS.findIndex(x=>x.toLowerCase()===parts[2].toLowerCase());
+    const pk=Object.keys(PAT).find(k=>k.toLowerCase()===parts[3].toLowerCase()||PAT[k].l.toLowerCase()===parts[3].toLowerCase());
+    if(d<0){r.reason="Unknown difficulty";rows.push(r);return;}
+    if(!pk){r.reason="Unknown pattern";rows.push(r);return;}
+    const v=validateAdd({title:parts[0],link:parts[1],lc:"",d,pat:pk,topic:patternTopic(pk),co:parts[4]||"",src:"",skill:"",blind:false,editId:null},seen);
+    r.ok=v.ok;r.reason=v.ok?"Ready to add":Object.values(v.err)[0];r.item=v.item||null;rows.push(r);
+  });
+  return rows;
+}
+function commitAdd(addAnother){
+  const v=validateAdd(ADDF);
+  if(!v.ok){ADDF.err=v.err;render();return;}
+  const it=v.item;
+  if(ADDF.editId){
+    const idx=CUSTOM.items.findIndex(x=>x.id===ADDF.editId);
+    if(idx>=0)CUSTOM.items[idx]=Object.assign({},CUSTOM.items[idx],it);
+    toast("Custom question updated");
+  }else{
+    const id=CUSTOM.next++;
+    CUSTOM.items.push(Object.assign({id,created:Date.now()},it));
+    toast("Custom question added");
+  }
+  saveCustom();rebuildCustom();logDay();
+  const topic=it.topicKey;
+  ADDF=freshAdd();ADDF.err={};
+  if(addAnother){ADDF.pat=it.pat;ADDF.topic=topic;ADDF.skill=it.skill;}
+  else{F={topic,phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};$("#search").value="";VIEW="list";}
+  render();
+}
 function renderSettings(){
-  let bytes=0;try{bytes=(localStorage.getItem(LSKEY)||"").length;}catch(e){}
+  let bytes=0;try{bytes=((localStorage.getItem(LSKEY)||"")+(localStorage.getItem(CKEY)||"")+(localStorage.getItem(DAYSKEY)||"")).length;}catch(e){}
   return'<h2 class="vh">Settings</h2><p class="vs">Theme, backups, and a hard reset. Your progress lives only in this browser — export regularly.</p>'+
   '<div class="card">'+
   '<div class="setrow"><div class="st"><b>Theme</b><p>Dark by default; light for bright rooms.</p></div><button class="btn" data-act="theme">Toggle theme</button></div>'+
   '<div class="setrow"><div class="st"><b>Export progress</b><p>Downloads a JSON snapshot — e.g. dsa500-progress-'+new Date().toISOString().slice(0,10)+'.json</p></div><button class="btn" data-act="export">'+ic("dl")+' Export</button></div>'+
   '<div class="setrow"><div class="st"><b>Import progress</b><p>Restore a previous snapshot. Replaces current progress.</p></div><button class="btn" data-act="import">'+ic("up")+' Import</button></div>'+
-  '<div class="setrow"><div class="st"><b>Reset all progress</b><p>Wipes every status, revision, note and timer. Cannot be undone.</p></div><button class="btn dng" data-act="reset">Reset everything</button></div>'+
+  '<div class="setrow"><div class="st"><b>Custom questions</b><p>'+CUSTOM.items.length+' definitions stored locally. Deleting removes each definition and its progress.</p></div><button class="btn dng" data-act="delcustom">Delete custom questions</button></div>'+
+  '<div class="setrow"><div class="st"><b>Reset all progress</b><p>Wipes every status, revision, note and timer. Custom question definitions are kept.</p></div><button class="btn dng" data-act="reset">Reset everything</button></div>'+
   '<div class="setrow"><div class="st"><b>Storage</b><p>Progress currently occupies '+(bytes/1024).toFixed(1)+' KB of localStorage.</p></div><span class="tag mono">'+Q.length+' questions · 0 premium</span></div>'+
   '<div class="setrow"><div class="st"><b>About the data</b><p>All '+Q.length+' rows are free, unique, pattern-classified LeetCode problems with historically reported company tags and no solutions anywhere. Source buttons appear only where a page verifiably exists: LeetCode for all, NeetCode for those in its curated sets, plus a LeetCode search fallback.</p></div></div>'+
   '</div>';
@@ -2010,7 +2230,7 @@ function syncHash(){
 function render(){
   const y=window.scrollY;
   renderNav();
-  const v={dash:renderDash,list:renderList,pat:renderPatterns,mixed:renderMixed,f50:renderF50,blind:renderBlind,mist:renderMist,settings:renderSettings}[VIEW]||renderDash;
+  const v={dash:renderDash,list:renderList,pat:renderPatterns,mixed:renderMixed,f50:renderF50,blind:renderBlind,mist:renderMist,pguide:renderPGuide,add:renderAdd,settings:renderSettings}[VIEW]||renderDash;
   $("#view").innerHTML=v();
   updateTop();
   $("#side").classList.remove("open");
@@ -2023,7 +2243,7 @@ function render(){
   const b=e.target.closest("[data-nav]");if(!b)return;
   const v=b.dataset.nav,rv=b.dataset.rev;
   if(rv){F.rev=rv;VIEW="list";}
-  else{if(VIEW==="list"&&v==="list")F.rev="all";VIEW=v;if(v!=="list")F.rev="all";}
+  else{if(v==="list"){F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};$("#search").value="";}VIEW=v;if(v!=="list")F.rev="all";}
   render();window.scrollTo(0,0);
 });
  $("#view").addEventListener("keydown",e=>{
@@ -2034,9 +2254,11 @@ function render(){
  });
  $("#view").addEventListener("click",e=>{
   const tick=e.target.closest("[data-tick]");
-  if(tick){const id=+tick.dataset.tick;F={topic:Q[id].topicKey,phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};VIEW="list";EXP.add(id);render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+id+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
+  if(tick){const id=+tick.dataset.tick;F={topic:qById(id).topicKey,phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};VIEW="list";EXP.add(id);render();setTimeout(()=>{const el=document.querySelector('article.q[data-qid="'+id+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
   const tr=e.target.closest("[data-topic]");
   if(tr){F.topic=tr.dataset.topic;F.rev="all";VIEW="list";render();window.scrollTo(0,0);return;}
+  const pg=e.target.closest("[data-pg]");
+  if(pg){PG[pg.dataset.pg]=pg.dataset.v;render();return;}
   const act=e.target.closest("[data-act]");
   if(!act)return;
   const a=act.dataset.act;
@@ -2044,37 +2266,80 @@ function render(){
   if(a==="clearf"){F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};$("#search").value="";render();return;}
   if(a==="mixnew"){drawMixed();return;}
   if(a==="mixdf"){MIXDF=+act.dataset.st;render();return;}
-  if(a==="open"){VIEW="list";F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};EXP.add(+act.dataset.id);render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+act.dataset.id+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
+  if(a==="open"){VIEW="list";F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};EXP.add(+act.dataset.id);render();setTimeout(()=>{const el=document.querySelector('article.q[data-qid="'+act.dataset.id+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
   if(a==="theme"){toggleTheme();return;}
   if(a==="export"){doExport();return;}
   if(a==="import"){$("#importfile").click();return;}
   if(a==="reset"){askReset();return;}
-  if(a==="nextunsolved"){const q=Q.find(q=>{const g=get(q.i);return !(g.s===2||g.m)});if(!q){toast("Every problem is solved — nice work");return;}VIEW="list";F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};EXP.add(q.i);render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+q.i+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
+  if(a==="delcustom"){askDelCustom();return;}
+  if(a==="pgpractice"){const k=act.dataset.k;F={topic:"all",phase:"all",diff:"all",pat:PAT[k].l,co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};$("#search").value="";VIEW="list";render();return;}
+  if(a==="pgadd"){const k=act.dataset.k;ADDF=freshAdd();ADDF.pat=k;ADDF.topic=patternTopic(k);ADDF.skill=PAT[k].sig;BULKROWS=null;VIEW="add";render();return;}
+  if(a==="coco"){const c=act.dataset.c;ADDF.co=(ADDF.co||"").includes(c)?String(ADDF.co).split("").filter(x=>x!==c).join(""):(ADDF.co||"")+c;render();return;}
+  if(a==="cclear"){ADDF=freshAdd();BULKROWS=null;render();return;}
+  if(a==="cadd"||a==="caddnext"){commitAdd(a==="caddnext");return;}
+  if(a==="bulkpreview"){BULKROWS=parseBulk();render();return;}
+  if(a==="bulkadd"){
+    if(!BULKROWS)BULKROWS=parseBulk();
+    const good=BULKROWS.filter(r=>r.ok&&r.item);
+    if(!good.length){toast("No valid rows to add");render();return;}
+    good.forEach(r=>{const id=CUSTOM.next++;CUSTOM.items.push(Object.assign({id,created:Date.now()},r.item));});
+    saveCustom();rebuildCustom();logDay();
+    const n=good.length;BULKROWS=null;ADDF.bulk="";ADDF.err={};
+    F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};$("#search").value="";VIEW="list";render();toast(n+" custom question"+(n===1?"":"s")+" added");return;
+  }
+  if(a==="nextunsolved"){const q=Q.find(q=>{const g=get(q.i);return !(g.s===2||g.m)});if(!q){toast("Every problem is solved — nice work");return;}VIEW="list";F={topic:"all",phase:"all",diff:"all",pat:"all",co:"all",src:"all",st:"all",rev:"all",hint:"all",q:""};EXP.add(q.i);render();setTimeout(()=>{const el=document.querySelector('article.q[data-qid="'+q.i+'"]');if(el)el.scrollIntoView({block:"center"});},50);return;}
   if(id===null)return;
   const g=get(id);
+  if(a==="cedit"){
+    const it=CUSTOM.items.find(x=>x.id===id);if(!it)return;
+    ADDF=freshAdd();ADDF.editId=it.id;Object.assign(ADDF,{title:it.title,link:it.link,lc:it.lc==="—"?"":it.lc,d:it.d,pat:it.pat,topic:it.topicKey,co:it.co||"",src:it.src||"",skill:it.skill||"",blind:!!it.blind});
+    BULKROWS=null;VIEW="add";render();return;
+  }
+  if(a==="cdel"){
+    PENDING_DEL=id;const it=CUSTOM.items.find(x=>x.id===id);
+    $("#mbox").innerHTML='<h3>Delete custom question?</h3><p>Remove “'+esc(it?it.title:"")+'” and its saved progress? This cannot be undone.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="cdelconfirm">Delete question</button></div>';
+    $("#modal").classList.add("open");return;
+  }
   if(a==="tog"){EXP.has(id)?EXP.delete(id):EXP.add(id);render();return;}
   if(a==="reveal"){set(id,{rv:1});render();return;}
-  if(a==="st"){const v=+act.dataset.st;const patch={s:v,last:Date.now()};if(v>0&&g.att===0)patch.att=1;set(id,patch);render();return;}
+  if(a==="st"){const v=+act.dataset.st;const patch={s:v,last:Date.now()};if(v>0&&g.att===0)patch.att=1;set(id,patch);logDay();render();return;}
   if(a==="sol"){set(id,{sol:+act.dataset.st});render();return;}
-  if(a==="r1"){set(id,{r1:g.r1?0:1});render();return;}
-  if(a==="r2"){set(id,{r2:g.r2?0:1});render();return;}
-  if(a==="m"){set(id,{m:g.m?0:1});render();return;}
-  if(a==="pid"){set(id,{pid:g.pid?0:1});render();return;}
-  if(a==="hint"){const n=+act.dataset.h;const h=g.h.slice();h[n]=h[n]?0:1;set(id,{h});render();return;}
+  if(a==="r1"){set(id,{r1:g.r1?0:1});if(!g.r1)logDay();render();return;}
+  if(a==="r2"){set(id,{r2:g.r2?0:1});if(!g.r2)logDay();render();return;}
+  if(a==="m"){set(id,{m:g.m?0:1});if(!g.m)logDay();render();return;}
+  if(a==="pid"){set(id,{pid:g.pid?0:1});if(!g.pid)logDay();render();return;}
+  if(a==="hint"){const n=+act.dataset.h;const h=g.h.slice();h[n]=h[n]?0:1;set(id,{h});if(!g.h[n])logDay();render();return;}
   if(a==="att"){logAttempt(id);render();return;}
   if(a==="tpause"){TIMERS[id]?pauseTimer(id):startTimer(id);render();return;}
   if(a==="treset"){resetTimer(id);render();return;}
 });
- $("#view").addEventListener("input",e=>{
-  const el=e.target;if(!el.dataset||!el.dataset.field)return;
-  const card=el.closest("[data-qid]");if(!card)return;
+  $("#view").addEventListener("input",e=>{
+   const el=e.target;if(!el.dataset)return;
+   if(el.dataset.add){
+     const f=el.dataset.add;
+     if(f==="blind")ADDF.blind=el.checked;
+     else{ADDF[f]=el.value;if(ADDF.err)delete ADDF.err[f];}
+     return;
+   }
+   if(el.dataset.pg==="q"){PG.q=el.value;rerenderFocused('[data-pg="q"]');return;}
+   if(!el.dataset.field)return;
+   const card=el.closest("[data-qid]");if(!card)return;
   const id=+card.dataset.qid,f=el.dataset.field,v=el.value;
   if(f==="min"){set(id,{min:Math.max(0,Math.floor(+v||0))});return;}
   const g=get(id);const patch={};patch[f]=v;set(id,patch);
 });
- $("#view").addEventListener("change",e=>{
-  const el=e.target;if(!el.dataset)return;
-  // filter dropdowns (data-f)
+  $("#view").addEventListener("change",e=>{
+   const el=e.target;if(!el.dataset)return;
+   if(el.dataset.pg==="sort"){PG.sort=el.value;render();return;}
+   if(el.dataset.add){
+     const f=el.dataset.add;
+     if(f==="blind"){ADDF.blind=el.checked;return;}
+     if(f==="pat"){ADDF.pat=el.value;ADDF.topic=patternTopic(el.value);ADDF.skill=PAT[el.value]?PAT[el.value].sig:"";ADDF.err={};render();return;}
+     if(f==="d"){ADDF.d=+el.value;if(ADDF.err)delete ADDF.err.d;return;}
+     if(f==="cfilter"){ADDF.cfilter=el.value;render();return;}
+     ADDF[f]=el.value;if(ADDF.err)delete ADDF.err[f];return;
+   }
+   // filter dropdowns (data-f)
   if(el.dataset.f){
     if(el.dataset.f==="sort"){SORT=el.value;render();return;}
     const map={topic:"topic",phase:"phase",diff:"diff",pat:"pat",co:"co",src:"src",st:"st",rev:"rev",hint:"hint"};
@@ -2089,6 +2354,7 @@ function render(){
   const id=+card.dataset.qid,f=el.dataset.field;
   if(f==="mis"){set(id,{mis:+el.value});updateTop();}
 });
+ $("#view").addEventListener("toggle",e=>{if(e.target.matches("details.cheat"))BULKOPEN=e.target.open;},true);
 let searchT=null;
  $("#search").addEventListener("input",e=>{
   F.q=e.target.value;
@@ -2105,9 +2371,10 @@ function toggleTheme(){
   $("#themebtn").innerHTML=cur==="dark"?ic("sun"):ic("moon");
 }
 function doExport(){
-  const blob=new Blob([JSON.stringify({app:"dsa500",version:1,exportedAt:new Date().toISOString(),progress:P},null,2)],{type:"application/json"});
+  const payload={app:"dsa500",version:2,exportedAt:new Date().toISOString(),progress:P,custom:{v:1,next:CUSTOM.next,items:CUSTOM.items},days:DAYS};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="dsa500-progress-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),600);toast("Progress exported");
+  setTimeout(()=>URL.revokeObjectURL(a.href),600);toast("Progress and custom questions exported");
 }
  $("#importfile").addEventListener("change",e=>{
   const file=e.target.files[0];if(!file)return;
@@ -2117,24 +2384,56 @@ function doExport(){
       const o=JSON.parse(fr.result);
       const pr=o&&o.progress&&typeof o.progress==="object"?o.progress:(o&&typeof o==="object"&&!Array.isArray(o)&&Object.keys(o).length&&("s" in (Object.values(o)[0]||{}))?o:null);
       if(!pr||typeof pr!=="object")throw 0;
+      const cl=(v,lo,hi)=>Math.max(lo,Math.min(hi,Math.floor(+v||0)));
+      let itemsC=CUSTOM.items.slice(),nextC=CUSTOM.next;
+      if(o&&+o.version===2&&o.custom&&Array.isArray(o.custom.items)){
+        const ids=new Set();
+        itemsC=o.custom.items.filter(it=>it&&typeof it==="object"&&Number.isFinite(it.id)&&it.id>=100001&&typeof it.title==="string"&&typeof it.link==="string").map(it=>({
+          id:cl(it.id,100001,1e9),title:String(it.title).slice(0,120),link:normLink(it.link),lc:String(it.lc||"—").slice(0,12),
+          d:cl(it.d,0,2),pat:Object.prototype.hasOwnProperty.call(PAT,it.pat)?it.pat:"hashmap",
+          topicKey:TOPICS.some(t=>t.key===it.topicKey)?it.topicKey:TOPICS[0].key,
+          co:String(it.co||"").split("").filter(x=>COMAP[x]).join(""),src:String(it.src||"").slice(0,60),
+          skill:String(it.skill||"").slice(0,160),blind:!!it.blind,created:cl(it.created,0,864e13)
+        })).filter(it=>it.link&&!ids.has(it.id)&&ids.add(it.id));
+        nextC=Math.max(100001,cl(o.custom.next,100001,1e9),...itemsC.map(x=>x.id+1));
+        DAYS=Array.isArray(o.days)?o.days.filter(d=>typeof d==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(d)).sort():DAYS;
+        saveDays();
+      }
+      CUSTOM={v:1,next:nextC,items:itemsC};saveCustom();rebuildCustom();
       const clean={};
-      Object.keys(pr).forEach(k=>{const n=+k;if(!Q[n])return;const x=pr[k]||{};clean[n]={s:x.s|0,r1:x.r1?1:0,r2:x.r2?1:0,m:x.m?1:0,h:[x.h&&x.h[0]?1:0,x.h&&x.h[1]?1:0,x.h&&x.h[2]?1:0],sol:x.sol|0,notes:String(x.notes||""),mis:x.mis|0,learn:String(x.learn||""),rem:String(x.rem||""),att:x.att|0,last:+x.last||0,sec:+x.sec||0,min:+x.min||0,rv:x.rv?1:0,pid:x.pid?1:0};});
-      P=clean;save();render();toast("Progress imported — "+Object.keys(clean).length+" problems restored");
+      Object.keys(pr).forEach(k=>{const n=+k;if(!qById(n))return;const x=pr[k]||{};clean[n]={s:cl(x.s,0,3),r1:x.r1?1:0,r2:x.r2?1:0,m:x.m?1:0,h:[x.h&&x.h[0]?1:0,x.h&&x.h[1]?1:0,x.h&&x.h[2]?1:0],sol:cl(x.sol,0,3),notes:String(x.notes||""),mis:cl(x.mis,0,MIS.length-1),learn:String(x.learn||""),rem:String(x.rem||""),att:cl(x.att,0,1e9),last:cl(x.last,0,864e13),sec:cl(x.sec,0,864e13),min:cl(x.min,0,1e9),rv:x.rv?1:0,pid:x.pid?1:0};});
+      Object.keys(TIMERS).forEach(id=>delete TIMERS[id]);EXP.clear();MIX={cur:null,seen:0};
+      P=clean;save();render();toast("Progress imported — "+Object.keys(clean).length+" problems, "+itemsC.length+" custom");
     }catch(err){toast("Import failed — not a valid dsa400 or dsa500 export file");}
     e.target.value="";
   };
   fr.readAsText(file);
 });
+function dropCustomProgress(ids){ids.forEach(id=>{delete P[id];delete TIMERS[id];EXP.delete(id);});save();}
+function askDelCustom(){
+  const n=CUSTOM.items.length;
+  $("#mbox").innerHTML='<h3>Delete custom questions?</h3><p>Remove all '+n+' custom definitions and their progress. Built-in progress is untouched. This cannot be undone.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="delcustomconfirm">Delete all custom</button></div>';
+  $("#modal").classList.add("open");
+}
 function askReset(){
-  $("#mbox").innerHTML='<h3>Reset all progress?</h3><p>This wipes every status, revision, hint log, note, mistake and timer for all '+Q.length+' problems. There is no undo — export first if in doubt.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="mconfirm">Yes, reset everything</button></div>';
+  $("#mbox").innerHTML='<h3>Reset all progress?</h3><p>This wipes every status, revision, hint log, note, mistake and timer for all '+Q.length+' problems. Custom question definitions are kept. There is no undo — export first if in doubt.</p><div class="acts"><button class="btn" data-act="mcancel">Cancel</button><button class="btn dng" data-act="mconfirm">Yes, reset everything</button></div>';
   $("#modal").classList.add("open");
 }
  $("#modal").addEventListener("click",e=>{
   if(e.target.id==="modal"){$("#modal").classList.remove("open");return;}
   const act=e.target.closest("[data-act]");if(!act)return;
   const a=act.dataset.act;
-  if(a==="mcancel"){$("#modal").classList.remove("open");return;}
-  if(a==="mconfirm"){$("#modal").classList.remove("open");P={};save();EXP.clear();MIX={cur:null,seen:0};render();toast("All progress reset");return;}
+  if(a==="mcancel"){$("#modal").classList.remove("open");PENDING_DEL=null;return;}
+  if(a==="cdelconfirm"){
+    const id=PENDING_DEL;PENDING_DEL=null;
+    if(id!==null){CUSTOM.items=CUSTOM.items.filter(x=>x.id!==id);saveCustom();dropCustomProgress([id]);rebuildCustom();ADDF=freshAdd();BULKROWS=null;toast("Custom question deleted");}
+    $("#modal").classList.remove("open");render();return;
+  }
+  if(a==="delcustomconfirm"){
+    const ids=CUSTOM.items.map(x=>x.id);CUSTOM.items=[];CUSTOM.next=100001;saveCustom();dropCustomProgress(ids);rebuildCustom();ADDF=freshAdd();BULKROWS=null;
+    $("#modal").classList.remove("open");render();toast("All custom questions deleted");return;
+  }
+  if(a==="mconfirm"){$("#modal").classList.remove("open");P={};Object.keys(TIMERS).forEach(id=>delete TIMERS[id]);EXP.clear();MIX={cur:null,seen:0};save();render();toast("All progress reset — custom questions kept");return;}
 });
 
 /* ---------- init ---------- */
@@ -2142,15 +2441,32 @@ function applyHash(){
   const h=decodeURIComponent(location.hash.slice(1));
   if(!h)return false;
   if(h.startsWith("rev-")&&["r1","r2","m","rv","today"].includes(h.slice(4))){VIEW="list";F.rev=h.slice(4);return true;}
-  if(["dash","list","pat","mixed","f50","blind","mist","settings"].includes(h)){VIEW=h;F.rev="all";return true;}
+  if(["dash","list","pat","mixed","f50","blind","mist","pguide","add","settings"].includes(h)){VIEW=h;F.rev="all";return true;}
   return false;
 }
+function auditApp(){
+  const issues=[],ids=new Set(),titles=new Set();
+  const routes=["dash","list","pat","mixed","f50","blind","mist","pguide","add","settings"];
+  Q.forEach(q=>{
+    if(ids.has(String(q.i)))issues.push("duplicate id "+q.i);ids.add(String(q.i));
+    if(!Object.prototype.hasOwnProperty.call(PAT,q.pat))issues.push("bad pattern "+q.pat+" on "+q.i);
+    if(!TOPICS.some(t=>t.key===q.topicKey))issues.push("bad topic "+q.topicKey+" on "+q.i);
+    const k=keyForTitle(q.title);if(titles.has(k))issues.push("duplicate title "+q.title);titles.add(k);
+  });
+  Object.keys(P).forEach(k=>{if(!qById(k))issues.push("orphan progress key "+k);});
+  Object.keys(TIMERS).forEach(k=>{if(!qById(k))issues.push("orphan timer "+k);});
+  NAV.forEach(n=>{if(!n[0].startsWith("_")&&!routes.includes(n[0]))issues.push("missing nav route "+n[0]);});
+  routes.forEach(r=>{if(!NAV.some(n=>n[0]===r))issues.push("missing nav entry "+r);});
+  return issues;
+}
+window.__audit=auditApp;
 window.addEventListener("hashchange",()=>{if(applyHash()){render();window.scrollTo(0,0);}});
 applyHash();
 try{const t=localStorage.getItem("dsa400_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
  $("#themebtn").innerHTML=document.documentElement.dataset.theme==="light"?ic("moon"):ic("sun");
  const mt=document.getElementById("metatheme");if(mt)mt.content=document.documentElement.dataset.theme==="light"?"#f2ede2":"#131110";
 render();
+if(/[?&]audit=1/.test(location.search)){const issues=auditApp();if(issues.length)console.warn("DSA·500 audit:",issues);else console.log("DSA·500 audit: clean");}
 console.log("DSA·500 ready — "+Q.length+" questions, "+TOPICS.length+" sections, checkpoints: "+Q.filter(q=>q.cp).length);
 </script>
 </body>
